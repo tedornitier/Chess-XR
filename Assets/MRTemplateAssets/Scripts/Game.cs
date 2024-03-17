@@ -67,9 +67,10 @@ public class Game : MonoBehaviour
     static (double, double) GetPieceCoordinateFromCell((int, int) cell)
     {
         double boardLength = 22.44;
+        double cellLength = boardLength / 8;
         (int x, int y) = cell;
-        double positionX = (boardLength * (x - 4) / 8 + boardLength * (x - 4 + 1) / 8) / 2;
-        double positionZ = (boardLength * (y - 4) / 8 + boardLength * (y - 4 + 1) / 8) / 2;
+        double positionX = (x - 4 + 0.5) * cellLength;
+        double positionZ = (y - 4 + 0.5) * cellLength;
         return (positionX, positionZ);
     }
 }
