@@ -19,7 +19,7 @@ public class Chess : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public void ChessPieceSelected() {
