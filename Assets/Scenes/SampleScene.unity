@@ -270,7 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbcf58eea4a77d48be797db4f313798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chessBoard: {fileID: 0}
+  chessBoard: {fileID: 1856391622}
+  playArea: {fileID: 1781921426}
   b_king: {fileID: 3220530950518378840, guid: c7134318cd86bde46b80b042c28bfdde, type: 3}
   b_queen: {fileID: 3220530950518378840, guid: a633baf04bc56d54a86dfdb67cced59d, type: 3}
   b_bishop: {fileID: 3220530950518378840, guid: 09d258e211564b84cb710f4add96de6e, type: 3}
@@ -479,7 +480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9ed28854774e24eb10428dd9879dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playArea: {fileID: 1781921426}
 --- !u!1001 &1109407790274764219
 PrefabInstance:
   m_ObjectHideFlags: 0
