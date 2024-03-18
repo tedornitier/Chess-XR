@@ -363,6 +363,63 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &409919187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 409919189}
+  - component: {fileID: 409919188}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &409919188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409919187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bbcf58eea4a77d48be797db4f313798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chessBoard: {fileID: 1096291039}
+  b_king: {fileID: 3220530950518378840, guid: c7134318cd86bde46b80b042c28bfdde, type: 3}
+  b_queen: {fileID: 3220530950518378840, guid: a633baf04bc56d54a86dfdb67cced59d, type: 3}
+  b_bishop: {fileID: 3220530950518378840, guid: 09d258e211564b84cb710f4add96de6e, type: 3}
+  b_knight: {fileID: 3220530950518378840, guid: 34f10c9cfff601240b42e6b7a41fdb67, type: 3}
+  b_rook: {fileID: 3220530950518378840, guid: 4dd3ba734acd8474cbf4744bde2f109a, type: 3}
+  b_pawn: {fileID: 3220530950518378840, guid: f362c478bce33ca46a47ea7cd4c54af0, type: 3}
+  w_king: {fileID: 3220530950518378840, guid: ef2a74f888cecac45ac862669419e65d, type: 3}
+  w_queen: {fileID: 3220530950518378840, guid: c8f24a4fb4a473b48bfa532dfd582b5c, type: 3}
+  w_bishop: {fileID: 3220530950518378840, guid: 97aebf88f89f9d64b891be7695b5fbc3, type: 3}
+  w_knight: {fileID: 3220530950518378840, guid: e0333d9d66e57474b8889b706151e215, type: 3}
+  w_rook: {fileID: 3220530950518378840, guid: 921a2765e3bfae248b60ad1de23b4185, type: 3}
+  w_pawn: {fileID: 3220530950518378840, guid: 111a1f5c323fdf643a370cbda4a020dc, type: 3}
+--- !u!4 &409919189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409919187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.020161228, y: 0.848465, z: -0.007226901}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &798086664 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7025650970629357324, guid: 8b4d02b4e05af714dab2a12548a310f8, type: 3}
@@ -1098,3 +1155,4 @@ SceneRoots:
   - {fileID: 1109407790274764219}
   - {fileID: 1615728350}
   - {fileID: 1587903128}
+  - {fileID: 409919189}

@@ -55,6 +55,37 @@ CapsuleCollider:
   m_Height: 0.05
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &306782857955112178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 2297643231922137340}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 306782857955112177}
+  m_Layer: 0
+  m_Name: 'Contact Spawn Trigger (Missing Prefab with guid: 60394d111cf239d4eaca503e74e2f64b)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &306782857955112177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 2297643231922137340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306782857955112178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0196, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8188857171127393126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606867099165690766
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +364,99 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.075, y: 0.01, z: 0.075}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2191085620452952029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 417563702444415955}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2191085620452952030}
+  m_Layer: 0
+  m_Name: 'Contact Spawn Trigger (Missing Prefab with guid: 60394d111cf239d4eaca503e74e2f64b)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2191085620452952030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 417563702444415955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191085620452952029}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0196, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3897309959054962094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3971865604876028376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 3223963271503615446}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3971865604876028379}
+  m_Layer: 0
+  m_Name: 'Contact Spawn Trigger (Missing Prefab with guid: 60394d111cf239d4eaca503e74e2f64b)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3971865604876028379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 3223963271503615446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971865604876028376}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7025650972192366443}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4174044895838751007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 2471940241118401809}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4174044895838751004}
+  m_Layer: 0
+  m_Name: 'Contact Spawn Trigger (Missing Prefab with guid: 60394d111cf239d4eaca503e74e2f64b)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4174044895838751004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
+  m_PrefabInstance: {fileID: 2471940241118401809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174044895838751007}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7025650970808197002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4770136204441838708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,16 +1325,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
---- !u!1 &2191085620452952029 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 417563702444415955}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2191085620452952030 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 417563702444415955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1037157468093994898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2343,16 +2457,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
---- !u!4 &306782857955112177 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 2297643231922137340}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &306782857955112178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 2297643231922137340}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2471940241118401809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2414,16 +2518,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
---- !u!4 &4174044895838751004 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 2471940241118401809}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4174044895838751007 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 2471940241118401809}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3223963271503615446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2485,16 +2579,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
---- !u!1 &3971865604876028376 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667790, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 3223963271503615446}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3971865604876028379 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1991496186046667789, guid: 60394d111cf239d4eaca503e74e2f64b, type: 3}
-  m_PrefabInstance: {fileID: 3223963271503615446}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5996082425784260477
 PrefabInstance:
   m_ObjectHideFlags: 0
