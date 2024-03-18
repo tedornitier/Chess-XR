@@ -1,23 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChessUtils : MonoBehaviour
+public class ChessUtils
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
+    public static (int, int) CalculateCellPosition(Vector3 position, float playAreaLength) {
+        int x = (int) Math.Floor(8 * position.x / playAreaLength) + 4;
+        int z = (int) Math.Floor(8 * position.z / playAreaLength) + 4;
+        return (x, z);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static (double, double) GetPieceCoordinateFromCell((int, int) cell, float playAreaLength)
     {
-
-    }
-
-    public static int Add(int a, int b)
-    {
-        return a + b;
+        double cellLength = playAreaLength / 8;
+        (int x, int z) = cell;
+        double positionX = (x - 4 + 0.5) * cellLength;
+        double positionZ = (z - 4 + 0.5) * cellLength;
+        return (positionX, positionZ);
     }
 }

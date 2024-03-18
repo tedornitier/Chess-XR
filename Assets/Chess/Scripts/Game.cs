@@ -7,6 +7,8 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject chessBoard;
     [SerializeField]
+    private GameObject playArea;
+    [SerializeField]
     private GameObject b_king;
     [SerializeField]
     private GameObject b_queen;
@@ -58,19 +60,14 @@ public class Game : MonoBehaviour
 
         foreach (KeyValuePair<(int, int), GameObject> piece in chessPiecesCoordinates)
         {
-            (double positionX, double positionZ) = GetPieceCoordinateFromCell(piece.Key);
-            GameObject chessPiece = Instantiate(piece.Value, GameObject.Find("chessboard").transform);
+            (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(piece.Key, getPlayAreaLength());
+            GameObject chessPiece = Instantiate(piece.Value, chessBoard.transform);
             chessPiece.transform.localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
         }
     }
 
-    static (double, double) GetPieceCoordinateFromCell((int, int) cell)
+    float getPlayAreaLength()
     {
-        double boardLength = 22.44;
-        double cellLength = boardLength / 8;
-        (int x, int y) = cell;
-        double positionX = (x - 4 + 0.5) * cellLength;
-        double positionZ = (y - 4 + 0.5) * cellLength;
-        return (positionX, positionZ);
+        return playArea.transform.localScale.x * playArea.GetComponent<MeshFilter>().mesh.bounds.size.x;
     }
 }
