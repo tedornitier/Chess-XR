@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour
+public class Game : MonoBehaviour // TODO this should be the chessboard class
 {
     [SerializeField]
     private GameObject chessBoard;

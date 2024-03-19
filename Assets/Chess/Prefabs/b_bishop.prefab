@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: type
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 712618022987391316, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: color
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5828428182851058546, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
       propertyPath: m_Name
       value: chess_piece_interactable
