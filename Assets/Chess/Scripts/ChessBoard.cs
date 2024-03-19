@@ -9,6 +9,12 @@ public class ChessBoard
         return board[x, y];
     }
 
+    public void SetPieceAt(int x, int y, ChessPiece piece)
+    {
+        board[x, y] = piece;
+        piece.MoveTo(x, y);
+    }
+
     public static bool IsWithinBounds(int x, int y) {
         return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
