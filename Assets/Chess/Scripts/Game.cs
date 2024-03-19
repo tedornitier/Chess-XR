@@ -61,8 +61,10 @@ public class Game : MonoBehaviour // TODO this should be the chessboard class
         foreach (KeyValuePair<(int, int), GameObject> piece in chessPiecesCoordinates)
         {
             (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(piece.Key, getPlayAreaLength());
-            GameObject chessPiece = Instantiate(piece.Value, chessBoard.transform);
-            chessPiece.transform.localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
+            GameObject chessPieceGameObject = Instantiate(piece.Value, chessBoard.transform);
+            chessPieceGameObject.transform.localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
+            ChessPiece chessPiece = chessPieceGameObject.GetComponentInChildren<ChessPiece>();
+            chessPiece.SetPosition(piece.Key.Item1, piece.Key.Item2);
         }
     }
 
