@@ -21,7 +21,7 @@ public class ChessBoardTests : MonoBehaviour
     {
         ChessBoard board = new ChessBoard();
         board.SetupBoard();
-        board.PrintBoard(board);
+        board.PrintBoard();
 
         Assert.AreEqual(board.GetPieceAt(0, 0).type, ChessType.Rook);
         Assert.AreEqual(board.GetPieceAt(0, 0).color, ChessColor.Black);

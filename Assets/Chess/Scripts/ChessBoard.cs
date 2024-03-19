@@ -53,14 +53,14 @@ public class ChessBoard
         board[7, 7] = new ChessPiece(ChessType.Rook, ChessColor.White, 7, 7);
     }
 
-    public void PrintBoard(ChessBoard board)
+    public void PrintBoard()
     {
         string boardString = "";
         for (int y = 0; y < 8; y++)
         {
             for (int x = 0; x < 8; x++)
             {
-                ChessPiece piece = board.GetPieceAt(x, y);
+                ChessPiece piece = GetPieceAt(x, y);
                 boardString += (piece == null) ? "□" : piece.GetSymbol();
             }
             boardString += "\n";
