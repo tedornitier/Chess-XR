@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ChessPiece : MonoBehaviour
+public class ChessPiece
 {
     [SerializeField]
     public ChessType type;
