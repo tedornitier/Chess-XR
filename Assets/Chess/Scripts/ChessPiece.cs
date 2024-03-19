@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class ChessPiece : MonoBehaviour
 {
-    // TODO public ChessPieceType Type;
+    [SerializeField]
+    public ChessType type;
+
     public void ChessPieceSelected() {
         Debug.Log("ChessPiece - ChessPieceSelected");
     }
