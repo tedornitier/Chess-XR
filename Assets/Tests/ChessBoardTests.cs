@@ -83,4 +83,24 @@ public class ChessBoardTests : MonoBehaviour
             Assert.AreEqual(board.GetPieceAt(i, 6).color, ChessColor.White);
         }
     }
+
+    [Test]
+    public void MovePieceTest()
+    {
+        ChessBoard board = new ChessBoard();
+        board.SetupBoard();
+        board.PrintBoard();
+
+        ChessPiece blackKnight1 = board.GetPieceAt(1, 0);
+        Assert.AreEqual(blackKnight1.type, ChessType.Knight);
+        Assert.AreEqual(blackKnight1.color, ChessColor.Black);
+
+        Debug.Log("Moving black knight from (1, 0) to (2, 2)");
+
+        board.MovePiece(1, 0, 2, 2);
+        board.PrintBoard();
+
+        Assert.AreEqual(board.GetPieceAt(1, 0), null);
+        Assert.AreEqual(board.GetPieceAt(2, 2).type, ChessType.Knight);
+    }
 }
