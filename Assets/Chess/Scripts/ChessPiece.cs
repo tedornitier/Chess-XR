@@ -33,12 +33,19 @@ public class ChessPiece
 
         switch (type) {
             case ChessType.King:
-                (int, int)[] kingDirections = new (int, int)[] {
+                (int, int)[] kingMoves = new (int, int)[] {
                     (-1, -1), (-1, 0), (-1, 1), (0, -1),
                     (0, 1), (1, -1), (1, 0), (1, 1)
                 };
-                for (int i = 0; i < kingDirections.GetLength(0); i++) {
-                    GetMovesInDirection(board, possibleMoves, kingDirections[i].Item1, kingDirections[i].Item2);
+                foreach (var move in kingMoves) {
+                    int newX = column + move.Item1;
+                    int newY = row + move.Item2;
+                    if (ChessBoard.IsWithinBounds(newX, newY)) {
+                        ChessPiece targetPiece = board.GetPieceAt(newX, newY);
+                        if (targetPiece == null || targetPiece.color != color) {
+                            possibleMoves.Add((newX, newY));
+                        }
+                    }
                 }
                 break;
             case ChessType.Queen:

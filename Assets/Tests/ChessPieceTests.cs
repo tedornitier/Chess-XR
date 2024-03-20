@@ -226,4 +226,29 @@ public class ChessPieceTests : MonoBehaviour
             (4, 3), (6, 3), (6, 4)
         }, piece.GetPossibleMoves(board));
     }
+
+    [Test]
+    public void GetPossibleKingMovesTest()
+    {
+        /*0 1 2 3 4 5 6 7
+        0 . . . . . x x x
+        1 . . . . . x ♔ x
+        2 . . . . . ♕ x #
+        3 . . . . . . . .
+        4 . . . . . . . .
+        5 . . . . . . . .
+        6 . . . . . . . .
+        7 . . . . . . . .*/
+        ChessPiece piece = new ChessPiece(ChessType.King, ChessColor.Black);
+        ChessBoard board = new ChessBoard();
+        board.SetPieceAt(6, 1, piece);
+        board.SetPieceAt(5, 2, new ChessPiece(ChessType.Queen, ChessColor.Black));
+        board.SetPieceAt(7, 2, new ChessPiece(ChessType.Pawn, ChessColor.White));
+        board.PrintBoard();
+        CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
+            (5, 0), (6, 0), (7, 0),
+            (5, 1), (7, 1),
+            (6, 2), (7, 2)
+        }, piece.GetPossibleMoves(board));
+    }
 }
