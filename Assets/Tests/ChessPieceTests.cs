@@ -6,7 +6,7 @@ using NUnit.Framework;
 public class ChessPieceTests : MonoBehaviour
 {
     [Test]
-    public void GetPawnPossibleMovesTest()
+    public void GetPossiblePawnMovesTest()
     {
         /*0 1 2 3 4 5 6 7
         0 . . . . . . . .
@@ -80,7 +80,7 @@ public class ChessPieceTests : MonoBehaviour
     }
 
     [Test]
-    public void GetRookPossibleMovesTest()
+    public void GetPossibleRookMovesTest()
     {
         /*0 1 2 3 4 5 6 7
         0 . . x . . . . .
@@ -134,6 +134,45 @@ public class ChessPieceTests : MonoBehaviour
         CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
             (2, 0), (2, 1), (2, 2), (2, 3), (2, 4), (2, 6), (2, 7),
             (1, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5)
+        }, piece.GetPossibleMoves(board));
+    }
+
+    [Test]
+    public void GetPossibleKnightMovesTest()
+    {
+        /*0 1 2 3 4 5 6 7
+        0 .[♘]. . . . . .
+        1 . . . x . . . .
+        2 x . x . . . . .
+        3 . . . . . . . .
+        4 . ♕ . ♛ . . . .
+        5 . . . . . . . .
+        6 . . . . . . . .
+        7 . . . . . . . .*/
+        ChessPiece piece = new ChessPiece(ChessType.Knight, ChessColor.Black);
+        ChessBoard board = new ChessBoard();
+        board.SetPieceAt(0, 1, piece);
+        board.SetPieceAt(1, 4, new ChessPiece(ChessType.Queen, ChessColor.Black));
+        board.SetPieceAt(3, 4, new ChessPiece(ChessType.Queen, ChessColor.White));
+        board.PrintBoard();
+        CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
+            (2, 0), (2, 2), (1, 3)
+        }, piece.GetPossibleMoves(board));
+
+        /*0 1 2 3 4 5 6 7
+        0 . x . x . . . .
+        1 x . . . x . . .
+        2 . .[♘]. . . . .
+        3 x . . . x . . .
+        4 . ♕ . # . . . .
+        5 . . . . . . . .
+        6 . . . . . . . .
+        7 . . . . . . . .*/
+        board.MovePiece(0, 1, 2, 2);
+        board.PrintBoard();
+        CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
+            (1, 0), (3, 0), (0, 1), (4, 1),
+            (0, 3), (4, 3), (3, 4)
         }, piece.GetPossibleMoves(board));
     }
 }
