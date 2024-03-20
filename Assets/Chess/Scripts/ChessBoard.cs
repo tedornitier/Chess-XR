@@ -66,7 +66,7 @@ public class ChessBoard
             for (int x = 0; x < 8; x++)
             {
                 ChessPiece piece = GetPieceAt(x, y);
-                boardString += (piece == null) ? "□" : piece.GetSymbol();
+                boardString += ((piece == null) ? "□" : piece.GetSymbol()) + "\t";
             }
             boardString += "\n";
         }

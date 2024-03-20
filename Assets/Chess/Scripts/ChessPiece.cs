@@ -85,26 +85,29 @@ public class ChessPiece
             case ChessType.Pawn:
                 int direction = (color == ChessColor.White) ? -1 : 1;
                 int initialRow = (color == ChessColor.White) ? 6 : 1;
-                int forwardOne = column + direction;
-                int forwardTwo = column + 2 * direction;
+                int nextRow = row + direction;
+                int nextNextRow = row + 2 * direction;
 
-                if (ChessBoard.IsWithinBounds(forwardOne, row) && board.GetPieceAt(forwardOne, row) == null) {
-                    possibleMoves.Add((forwardOne, row));
-                    if (row == initialRow && ChessBoard.IsWithinBounds(forwardTwo, row) && board.GetPieceAt(forwardTwo, row) == null) {
-                        possibleMoves.Add((forwardTwo, row));
+                if (ChessBoard.IsWithinBounds(column, nextRow) && board.GetPieceAt(column, nextRow) == null) {
+                    possibleMoves.Add((column, nextRow));
+
+                    if (row == initialRow && ChessBoard.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
+                        possibleMoves.Add((column, nextNextRow));
                     }
                 }
 
-                // Capture moves
-                int[] captureCols = { row - 1, row + 1 };
+                // Capture moves TODO only if IsWithinBounds nextRow already
+                int[] captureCols = { column - 1, column + 1 };
                 foreach (int col in captureCols) {
-                    if (ChessBoard.IsWithinBounds(forwardOne, col)) {
-                        ChessPiece targetPiece = board.GetPieceAt(forwardOne, col);
+                    if (ChessBoard.IsWithinBounds(col, nextRow)) {
+                        ChessPiece targetPiece = board.GetPieceAt(col, nextRow);
                         if (targetPiece != null && targetPiece.color != color) {
-                            possibleMoves.Add((forwardOne, col));
+                            possibleMoves.Add((col, nextRow));
                         }
                     }
                 }
+
+                // TODO en passant
                 break;
             default:
                 Debug.LogError("Unknown chess piece type: " + type);
