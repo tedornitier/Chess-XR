@@ -12,7 +12,7 @@ public class ChessBoard
     public void SetPieceAt(int x, int y, ChessPiece piece)
     {
         board[x, y] = piece;
-        piece.MoveTo(x, y);
+        piece.SetPosition(x, y);
     }
 
     public static bool IsWithinBounds(int x, int y)

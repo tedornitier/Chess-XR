@@ -186,9 +186,4 @@ public class ChessPiece
         }
         return "";
     }
-
-    public void MoveTo(int x, int y) {
-        column = x;
-        row = y;
-    }
 }
