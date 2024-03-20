@@ -15,16 +15,16 @@ public class ChessBoard
         piece.MoveTo(x, y);
     }
 
-    public static bool IsWithinBounds(int x, int y) {
+    public static bool IsWithinBounds(int x, int y)
+    {
         return x >= 0 && x < 8 && y >= 0 && y < 8;
     }
 
     public void MovePiece(int fromX, int fromY, int toX, int toY)
     {
         ChessPiece piece = board[fromX, fromY];
-        board[fromX, fromY] = null;
-        board[toX, toY] = piece;
-        piece.MoveTo(toX, toY);
+        RemovePiece(fromX, fromY);
+        SetPieceAt(toX, toY, piece);
     }
 
     public void RemovePiece(int x, int y)
