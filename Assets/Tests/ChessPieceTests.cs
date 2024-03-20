@@ -9,14 +9,14 @@ public class ChessPieceTests : MonoBehaviour
     public void GetPawnPossibleMovesTest()
     {
         /*0 1 2 3 4 5 6 7
-        0 □ □ □ □ □ □ □ □
-        1[♙]□ □ □ □ □ □ □
-        2 x □ □ □ □ □ □ □
-        3 x □ □ □ □ □ □ □
-        4 □ ♕ □ □ □ □ □ □
-        5 □ ♛ □ □ □ □ □ □
-        6 ♖ □ □ □ □ □ □ □
-        7 □ □ □ □ □ □ □ □*/
+        0 . . . . . . . .
+        1[♙]. . . . . . .
+        2 x . . . . . . .
+        3 x . . . . . . .
+        4 . ♕ . . . . . .
+        5 . ♛ . . . . . .
+        6 ♖ . . . . . . .
+        7 . . . . . . . .*/
         ChessPiece piece = new ChessPiece(ChessType.Pawn, ChessColor.Black);
         ChessBoard board = new ChessBoard();
         board.SetPieceAt(0, 1, piece);
@@ -29,10 +29,10 @@ public class ChessPieceTests : MonoBehaviour
         board.PrintBoard();
 
         /*0 1 2 3 4 5 6 7
-        3[♙]□ □ □ □ □ □ □
-        4 x ♕ □ □ □ □ □ □
-        5 □ ♛ □ □ □ □ □ □
-        6 ♖ □ □ □ □ □ □ □*/
+        3[♙]. . . . . . .
+        4 x ♕ . . . . . .
+        5 . ♛ . . . . . .
+        6 ♖ . . . . . . .*/
         board.MovePiece(0, 1, 0, 3);
         CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
             (0, 4)
@@ -40,9 +40,9 @@ public class ChessPieceTests : MonoBehaviour
         board.PrintBoard();
 
         /*0 1 2 3 4 5 6 7
-        4[♙]♕ □ □ □ □ □ □
-        5 x # □ □ □ □ □ □
-        6 ♖ □ □ □ □ □ □ □*/
+        4[♙]♕ . . . . . .
+        5 x # . . . . . .
+        6 ♖ . . . . . . .*/
         board.MovePiece(0, 3, 0, 4);
         CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
             (0, 5), (1, 5)
@@ -50,18 +50,18 @@ public class ChessPieceTests : MonoBehaviour
         board.PrintBoard();
 
         /*0 1 2 3 4 5 6 7
-        4 □ ♕ □ □ □ □ □ □
-        5[♙]♛ □ □ □ □ □ □
-        6 ♖ □ □ □ □ □ □ □*/
+        4 . ♕ . . . . . .
+        5[♙]♛ . . . . . .
+        6 ♖ . . . . . . .*/
         board.MovePiece(0, 4, 0, 5);
         Assert.AreEqual(0, piece.GetPossibleMoves(board).Count);
         board.PrintBoard();
 
         /*0 1 2 3 4 5 6 7
-        4 □ ♕ □ □ □ □ □ □
-        5 □ ♛ □ □ □ □ □ □
-        6[♙]□ □ □ □ □ □ ♖
-        7 x □ □ □ □ □ □ □*/
+        4 . ♕ . . . . . .
+        5 . ♛ . . . . . .
+        6[♙]. . . . . . ♖
+        7 x . . . . . . .*/
         board.MovePiece(0, 6, 7, 6);
         board.MovePiece(0, 5, 0, 6);
         CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
@@ -70,10 +70,10 @@ public class ChessPieceTests : MonoBehaviour
         board.PrintBoard();
 
         /*0 1 2 3 4 5 6 7
-        4 □ ♕ □ □ □ □ □ □
-        5 □ ♛ □ □ □ □ □ □
-        6 □ □ □ □ □ □ □ ♖
-        7[♙]□ □ □ □ □ □ □*/
+        4 . ♕ . . . . . .
+        5 . ♛ . . . . . .
+        6 . . . . . . . ♖
+        7[♙]. . . . . . .*/
         board.MovePiece(0, 6, 0, 7);
         Assert.AreEqual(0, piece.GetPossibleMoves(board).Count);
         board.PrintBoard();
@@ -83,14 +83,14 @@ public class ChessPieceTests : MonoBehaviour
     public void GetRookPossibleMovesTest()
     {
         /*0 1 2 3 4 5 6 7
-        0 □ □ x □ □ □ □ □
+        0 . . x . . . . .
         1 x x[♖]x x x x x
-        2 □ □ x □ □ □ □ □
-        3 □ □ x □ □ □ □ □
-        4 □ ♕ x □ □ □ □ □
-        5 □ ♛ x □ □ □ □ □
-        6 □ □ x □ □ □ □ □
-        7 □ □ x □ □ □ □ □*/
+        2 . . x . . . . .
+        3 . . x . . . . .
+        4 . ♕ x . . . . .
+        5 . ♛ x . . . . .
+        6 . . x . . . . .
+        7 . . x . . . . .*/
         ChessPiece piece = new ChessPiece(ChessType.Rook, ChessColor.Black);
         ChessBoard board = new ChessBoard();
         board.SetPieceAt(2, 1, piece);
@@ -104,14 +104,14 @@ public class ChessPieceTests : MonoBehaviour
 
         // move the rook to 2 4
         /*0 1 2 3 4 5 6 7
-        0 □ □ x □ □ □ □ □
-        1 □ □ x □ □ □ □ □
-        2 □ □ x □ □ □ □ □
-        3 □ □ x □ □ □ □ □
-        4 □ ♕[♖]x x x x x
-        5 □ ♛ x □ □ □ □ □
-        6 □ □ x □ □ □ □ □
-        7 □ □ x □ □ □ □ □*/
+        0 . . x . . . . .
+        1 . . x . . . . .
+        2 . . x . . . . .
+        3 . . x . . . . .
+        4 . ♕[♖]x x x x x
+        5 . ♛ x . . . . .
+        6 . . x . . . . .
+        7 . . x . . . . .*/
         board.MovePiece(2, 1, 2, 4);
         board.PrintBoard();
         CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
@@ -121,14 +121,14 @@ public class ChessPieceTests : MonoBehaviour
 
         // move the rook to 2 5
         /*0 1 2 3 4 5 6 7
-        0 □ □ x □ □ □ □ □
-        1 □ □ x □ □ □ □ □
-        2 □ □ x □ □ □ □ □
-        3 □ □ x □ □ □ □ □
-        4 □ ♕ x □ □ □ □ □
-        5 □ #[♖]x x x x x
-        6 □ □ x □ □ □ □ □
-        7 □ □ x □ □ □ □ □*/
+        0 . . x . . . . .
+        1 . . x . . . . .
+        2 . . x . . . . .
+        3 . . x . . . . .
+        4 . ♕ x . . . . .
+        5 . #[♖]x x x x x
+        6 . . x . . . . .
+        7 . . x . . . . .*/
         board.MovePiece(2, 4, 2, 5);
         board.PrintBoard();
         CollectionAssert.AreEquivalent(new HashSet<(int, int)> {
