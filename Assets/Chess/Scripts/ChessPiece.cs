@@ -52,71 +52,22 @@ public class ChessPiece
 
         switch (type) {
             case ChessType.King:
-                foreach (var move in kingMoves) {
-                    int newX = column + move.Item1;
-                    int newY = row + move.Item2;
-                    if (ChessBoard.IsWithinBounds(newX, newY)) {
-                        ChessPiece targetPiece = board.GetPieceAt(newX, newY);
-                        if (targetPiece == null || targetPiece.color != color) {
-                            possibleMoves.Add((newX, newY));
-                        }
-                    }
-                }
+                AddMoves(board, possibleMoves, kingMoves);
                 break;
             case ChessType.Queen:
-                for (int i = 0; i < queenDirections.GetLength(0); i++) {
-                    GetMovesInDirection(board, possibleMoves, queenDirections[i].Item1, queenDirections[i].Item2);
-                }
+                AddMovesInAllDirections(board, possibleMoves, queenDirections);
                 break;
             case ChessType.Rook:
-                for (int i = 0; i < rookDirections.GetLength(0); i++) {
-                    GetMovesInDirection(board, possibleMoves, rookDirections[i].Item1, rookDirections[i].Item2);
-                }
+                AddMovesInAllDirections(board, possibleMoves, rookDirections);
                 break;
             case ChessType.Bishop:
-                for (int i = 0; i < bishopDirections.GetLength(0); i++) {
-                    GetMovesInDirection(board, possibleMoves, bishopDirections[i].Item1, bishopDirections[i].Item2);
-                }
+                AddMovesInAllDirections(board, possibleMoves, bishopDirections);
                 break;
             case ChessType.Knight:
-                foreach (var move in knightMoves) {
-                    int newX = column + move.Item1;
-                    int newY = row + move.Item2;
-                    if (ChessBoard.IsWithinBounds(newX, newY)) {
-                        ChessPiece targetPiece = board.GetPieceAt(newX, newY);
-                        if (targetPiece == null || targetPiece.color != color) {
-                            possibleMoves.Add((newX, newY));
-                        }
-                    }
-                }
+                AddMoves(board, possibleMoves, knightMoves);
                 break;
             case ChessType.Pawn:
-                int direction = (color == ChessColor.White) ? -1 : 1;
-                int initialRow = (color == ChessColor.White) ? 6 : 1;
-                int nextRow = row + direction;
-                int nextNextRow = row + 2 * direction;
-
-                if (ChessBoard.IsWithinBounds(column, nextRow)) {
-                    if (board.GetPieceAt(column, nextRow) == null) {
-                        possibleMoves.Add((column, nextRow));
-
-                        if (row == initialRow && ChessBoard.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
-                            possibleMoves.Add((column, nextNextRow));
-                        }
-                    }
-
-                    int[] captureCols = { column - 1, column + 1 };
-                    foreach (int col in captureCols) {
-                        if (ChessBoard.IsWithinBounds(col, nextRow)) {
-                            ChessPiece targetPiece = board.GetPieceAt(col, nextRow);
-                            if (targetPiece != null && targetPiece.color != color) {
-                                possibleMoves.Add((col, nextRow));
-                            }
-                        }
-                    }
-                }
-
-                // TODO en passant
+                AddPawnMoves(board, possibleMoves);
                 break;
             default:
                 Debug.LogError("Unknown chess piece type: " + type);
@@ -124,6 +75,54 @@ public class ChessPiece
         }
 
         return possibleMoves;
+    }
+
+    private void AddMoves(ChessBoard board, HashSet<(int, int)> possibleMoves, (int, int)[] moves) {
+        foreach (var move in moves) {
+            int newX = column + move.Item1;
+            int newY = row + move.Item2;
+            if (ChessBoard.IsWithinBounds(newX, newY)) {
+                ChessPiece targetPiece = board.GetPieceAt(newX, newY);
+                if (targetPiece == null || targetPiece.color != color) {
+                    possibleMoves.Add((newX, newY));
+                }
+            }
+        }
+    }
+
+    private void AddMovesInAllDirections(ChessBoard board, HashSet<(int, int)> possibleMoves, (int, int)[] directions) {
+        foreach (var direction in directions) {
+            GetMovesInDirection(board, possibleMoves, direction.Item1, direction.Item2);
+        }
+    }
+
+    private void AddPawnMoves(ChessBoard board, HashSet<(int, int)> possibleMoves) {
+        int direction = (color == ChessColor.White) ? -1 : 1;
+        int initialRow = (color == ChessColor.White) ? 6 : 1;
+        int nextRow = row + direction;
+        int nextNextRow = row + 2 * direction;
+
+        if (ChessBoard.IsWithinBounds(column, nextRow)) {
+            if (board.GetPieceAt(column, nextRow) == null) {
+                possibleMoves.Add((column, nextRow));
+
+                if (row == initialRow && ChessBoard.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
+                    possibleMoves.Add((column, nextNextRow));
+                }
+            }
+
+            int[] captureCols = { column - 1, column + 1 };
+            foreach (int col in captureCols) {
+                if (ChessBoard.IsWithinBounds(col, nextRow)) {
+                    ChessPiece targetPiece = board.GetPieceAt(col, nextRow);
+                    if (targetPiece != null && targetPiece.color != color) {
+                        possibleMoves.Add((col, nextRow));
+                    }
+                }
+            }
+        }
+
+        // TODO en passant
     }
 
     private void GetMovesInDirection(ChessBoard board, HashSet<(int, int)> possibleMoves, int dx, int dy) {
