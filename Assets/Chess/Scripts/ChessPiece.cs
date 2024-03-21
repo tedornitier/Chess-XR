@@ -95,21 +95,22 @@ public class ChessPiece
                 int nextRow = row + direction;
                 int nextNextRow = row + 2 * direction;
 
-                if (ChessBoard.IsWithinBounds(column, nextRow) && board.GetPieceAt(column, nextRow) == null) {
-                    possibleMoves.Add((column, nextRow));
+                if (ChessBoard.IsWithinBounds(column, nextRow)) {
+                    if (board.GetPieceAt(column, nextRow) == null) {
+                        possibleMoves.Add((column, nextRow));
 
-                    if (row == initialRow && ChessBoard.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
-                        possibleMoves.Add((column, nextNextRow));
+                        if (row == initialRow && ChessBoard.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
+                            possibleMoves.Add((column, nextNextRow));
+                        }
                     }
-                }
 
-                // Capture moves TODO only if IsWithinBounds nextRow already
-                int[] captureCols = { column - 1, column + 1 };
-                foreach (int col in captureCols) {
-                    if (ChessBoard.IsWithinBounds(col, nextRow)) {
-                        ChessPiece targetPiece = board.GetPieceAt(col, nextRow);
-                        if (targetPiece != null && targetPiece.color != color) {
-                            possibleMoves.Add((col, nextRow));
+                    int[] captureCols = { column - 1, column + 1 };
+                    foreach (int col in captureCols) {
+                        if (ChessBoard.IsWithinBounds(col, nextRow)) {
+                            ChessPiece targetPiece = board.GetPieceAt(col, nextRow);
+                            if (targetPiece != null && targetPiece.color != color) {
+                                possibleMoves.Add((col, nextRow));
+                            }
                         }
                     }
                 }
