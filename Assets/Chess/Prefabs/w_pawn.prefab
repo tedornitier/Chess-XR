@@ -143,6 +143,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9176638502787329738}
     m_Modifications:
+    - target: {fileID: 712618022987391316, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 712618022987391316, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: color
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5828428182851058546, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
       propertyPath: m_Name
       value: chess_piece_interactable
@@ -187,7 +203,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 712618022987391316, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7750057461956999996, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
