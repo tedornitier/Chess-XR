@@ -151,14 +151,6 @@ PrefabInstance:
       propertyPath: color
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
-      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5828428182851058546, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
       propertyPath: m_Name
       value: chess_piece_interactable
