@@ -11,6 +11,25 @@ public class ChessPiece
     int column = -1;
     int row = -1;
 
+    private static readonly (int, int)[] kingMoves = new (int, int)[] {
+        (-1, -1), (-1, 0), (-1, 1), (0, -1),
+        (0, 1), (1, -1), (1, 0), (1, 1)
+    };
+    private static readonly (int, int)[] queenDirections = new (int, int)[] {
+        (-1, -1), (-1, 0), (-1, 1), (0, -1),
+        (0, 1), (1, -1), (1, 0), (1, 1)
+    };
+    private static readonly (int, int)[] rookDirections = new (int, int)[] {
+        (-1, 0), (0, -1), (0, 1), (1, 0)
+    };
+    private static readonly (int, int)[] bishopDirections = new (int, int)[] {
+        (-1, -1), (-1, 1), (1, -1), (1, 1)
+    };
+    private static readonly (int, int)[] knightMoves = new (int, int)[] {
+        (-2, -1), (-2, 1), (-1, -2), (-1, 2),
+        (1, -2), (1, 2), (2, -1), (2, 1)
+    };
+
     public ChessPiece(ChessType type, ChessColor color) {
         this.type = type;
         this.color = color;
@@ -33,10 +52,6 @@ public class ChessPiece
 
         switch (type) {
             case ChessType.King:
-                (int, int)[] kingMoves = new (int, int)[] {
-                    (-1, -1), (-1, 0), (-1, 1), (0, -1),
-                    (0, 1), (1, -1), (1, 0), (1, 1)
-                };
                 foreach (var move in kingMoves) {
                     int newX = column + move.Item1;
                     int newY = row + move.Item2;
@@ -49,35 +64,21 @@ public class ChessPiece
                 }
                 break;
             case ChessType.Queen:
-                (int, int)[] queenDirections = new (int, int)[] {
-                    (-1, -1), (-1, 0), (-1, 1), (0, -1),
-                    (0, 1), (1, -1), (1, 0), (1, 1)
-                };
                 for (int i = 0; i < queenDirections.GetLength(0); i++) {
                     GetMovesInDirection(board, possibleMoves, queenDirections[i].Item1, queenDirections[i].Item2);
                 }
                 break;
             case ChessType.Rook:
-                (int, int)[] rookDirections = new (int, int)[] {
-                    (-1, 0), (0, -1), (0, 1), (1, 0)
-                };
                 for (int i = 0; i < rookDirections.GetLength(0); i++) {
                     GetMovesInDirection(board, possibleMoves, rookDirections[i].Item1, rookDirections[i].Item2);
                 }
                 break;
             case ChessType.Bishop:
-                (int, int)[] bishopDirections = new (int, int)[] {
-                    (-1, -1), (-1, 1), (1, -1), (1, 1)
-                };
                 for (int i = 0; i < bishopDirections.GetLength(0); i++) {
                     GetMovesInDirection(board, possibleMoves, bishopDirections[i].Item1, bishopDirections[i].Item2);
                 }
                 break;
             case ChessType.Knight:
-                (int, int)[] knightMoves = new (int, int)[] {
-                    (-2, -1), (-2, 1), (-1, -2), (-1, 2),
-                    (1, -2), (1, 2), (2, -1), (2, 1)
-                };
                 foreach (var move in knightMoves) {
                     int newX = column + move.Item1;
                     int newY = row + move.Item2;
