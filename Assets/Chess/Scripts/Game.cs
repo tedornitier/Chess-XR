@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour // TODO this should be the chessboard class
+public class Game : MonoBehaviour
 {
     [SerializeField]
-    private GameObject chessBoard;
+    private GameObject chessBoardObject;
     [SerializeField]
     private GameObject playArea;
     [SerializeField]
@@ -33,9 +33,12 @@ public class Game : MonoBehaviour // TODO this should be the chessboard class
     [SerializeField]
     private GameObject w_pawn;
 
+    private ChessBoard chessBoard = new ChessBoard();
+    (int, int) pickedUpPiecePosition = (-1, -1);
 
     void Start()
     {
+        chessBoard.SetupBoard();
         ArrangeChessBoard();
     }
 
@@ -61,15 +64,35 @@ public class Game : MonoBehaviour // TODO this should be the chessboard class
         foreach (KeyValuePair<(int, int), GameObject> piece in chessPiecesCoordinates)
         {
             (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(piece.Key, getPlayAreaLength());
-            GameObject chessPieceGameObject = Instantiate(piece.Value, chessBoard.transform);
+            GameObject chessPieceGameObject = Instantiate(piece.Value, chessBoardObject.transform);
             chessPieceGameObject.transform.localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
-            ChessPiece chessPiece = chessPieceGameObject.GetComponentInChildren<ChessPiece>();
-            chessPiece.SetPosition(piece.Key.Item1, piece.Key.Item2);
         }
     }
 
     float getPlayAreaLength()
     {
         return playArea.transform.localScale.x * playArea.GetComponent<MeshFilter>().mesh.bounds.size.x;
+    }
+
+    public void onPiecePickUp(Vector3 position)
+    {
+        Debug.Log("Piece picked up");
+        pickedUpPiecePosition = ChessUtils.CalculateCellPosition(position, getPlayAreaLength());
+    }
+
+    public void onPieceDrop(Vector3 position)
+    {
+        Debug.Log("Piece dropped");
+        if (pickedUpPiecePosition != (-1, -1))
+        {
+            Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + position);
+            chessBoard.MovePiece(pickedUpPiecePosition, ChessUtils.CalculateCellPosition(position, getPlayAreaLength()));
+            chessBoard.PrintBoard();
+            pickedUpPiecePosition = (-1, -1);
+        }
+        else
+        {
+            Debug.Log("No piece was picked up");
+        }
     }
 }
