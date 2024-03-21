@@ -97,7 +97,7 @@ public class ChessBoardTests : MonoBehaviour
 
         Debug.Log("Moving black knight from (1, 0) to (2, 2)");
 
-        board.MovePiece(1, 0, 2, 2);
+        board.MovePiece((1, 0), (2, 2));
         board.PrintBoard();
 
         Assert.AreEqual(board.GetPieceAt(1, 0), null);
