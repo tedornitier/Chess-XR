@@ -65,7 +65,7 @@ public class Game : MonoBehaviour
         {
             (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(piece.Key, getPlayAreaLength());
             GameObject chessPieceGameObject = Instantiate(piece.Value, chessBoardObject.transform);
-            chessPieceGameObject.transform.localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
+            chessPieceGameObject.transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
         }
     }
 
@@ -76,8 +76,8 @@ public class Game : MonoBehaviour
 
     public void onPiecePickUp(Vector3 position)
     {
-        Debug.Log("Piece picked up");
         pickedUpPiecePosition = ChessUtils.CalculateCellPosition(position, getPlayAreaLength());
+        Debug.Log("Piece picked up at " + pickedUpPiecePosition + " from " + position);
     }
 
     public void onPieceDrop(Vector3 position)
