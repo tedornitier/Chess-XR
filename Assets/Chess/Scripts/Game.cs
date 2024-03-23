@@ -76,17 +76,18 @@ public class Game : MonoBehaviour
 
     public void onPiecePickUp(Vector3 position)
     {
-        pickedUpPiecePosition = ChessUtils.CalculateCellPosition(position, getPlayAreaLength());
-        Debug.Log("Piece picked up at " + pickedUpPiecePosition + " from " + position);
+        Vector3 localPosition = chessBoardObject.transform.InverseTransformPoint(position);
+        pickedUpPiecePosition = ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength());
+        Debug.Log("Piece picked up at " + pickedUpPiecePosition + " from " + localPosition);
     }
 
-    public void onPieceDrop(Vector3 position)
+    public void onPieceDrop(Vector3 localPosition)
     {
-        Debug.Log("Piece dropped");
+        Debug.Log("Piece dropped at " + localPosition);
         if (pickedUpPiecePosition != (-1, -1))
         {
-            Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + position);
-            chessBoard.MovePiece(pickedUpPiecePosition, ChessUtils.CalculateCellPosition(position, getPlayAreaLength()));
+            Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + localPosition);
+            chessBoard.MovePiece(pickedUpPiecePosition, ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength()));
             chessBoard.PrintBoard();
             pickedUpPiecePosition = (-1, -1);
         }
