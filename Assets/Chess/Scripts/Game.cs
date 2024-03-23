@@ -37,6 +37,7 @@ public class Game : MonoBehaviour
 
     private ChessBoard chessBoard = new ChessBoard();
     (int, int) pickedUpPiecePosition = (-1, -1);
+    List<GameObject> possibleMoveObjects = new List<GameObject>();
 
     void Start()
     {
@@ -98,6 +99,7 @@ public class Game : MonoBehaviour
         (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(cellPosition, getPlayAreaLength());
         GameObject possibleMoveGameObject = Instantiate(possibleMove, chessBoardObject.transform);
         possibleMoveGameObject.transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
+        possibleMoveObjects.Add(possibleMoveGameObject);
     }
 
     public void onPieceDrop(Vector3 localPosition)
@@ -109,6 +111,10 @@ public class Game : MonoBehaviour
             chessBoard.MovePiece(pickedUpPiecePosition, ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength()));
             chessBoard.PrintBoard();
             pickedUpPiecePosition = (-1, -1);
+            foreach (GameObject possibleMoveObject in possibleMoveObjects)
+            {
+                Destroy(possibleMoveObject);
+            }
         }
         else
         {
