@@ -9,6 +9,8 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject playArea;
     [SerializeField]
+    private GameObject possibleMove;
+    [SerializeField]
     private GameObject b_king;
     [SerializeField]
     private GameObject b_queen;
@@ -65,7 +67,7 @@ public class Game : MonoBehaviour
         {
             (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(piece.Key, getPlayAreaLength());
             GameObject chessPieceGameObject = Instantiate(piece.Value, chessBoardObject.transform);
-            chessPieceGameObject.transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
+            chessPieceGameObject.transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.0f, (float)positionZ);
         }
     }
 
@@ -79,6 +81,23 @@ public class Game : MonoBehaviour
         Vector3 localPosition = chessBoardObject.transform.InverseTransformPoint(position);
         pickedUpPiecePosition = ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength());
         Debug.Log("Piece picked up at " + pickedUpPiecePosition + " from " + localPosition);
+
+        ChessPiece piece = chessBoard.GetPieceAt(pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2);
+        if (piece != null)
+        {
+            HashSet<(int, int)> possibleMoves = piece.GetPossibleMoves(chessBoard);
+            foreach ((int, int) move in possibleMoves)
+            {
+                SpawnPossibleMove(move);
+            }
+        }
+    }
+
+    void SpawnPossibleMove((int, int) cellPosition)
+    {
+        (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(cellPosition, getPlayAreaLength());
+        GameObject possibleMoveGameObject = Instantiate(possibleMove, chessBoardObject.transform);
+        possibleMoveGameObject.transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.5f, (float)positionZ);
     }
 
     public void onPieceDrop(Vector3 localPosition)
