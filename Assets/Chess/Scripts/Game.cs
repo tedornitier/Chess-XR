@@ -85,7 +85,7 @@ public class Game : MonoBehaviour
         Vector3 piecePosition = localPosition;
         if (debug) { piecePosition = position; }
         pickedUpPiecePosition = ChessUtils.CalculateCellPosition(piecePosition, getPlayAreaLength());
-        Debug.Log("Piece picked up at " + pickedUpPiecePosition + " from " + localPosition);
+        Debug.Log("Piece picked up at " + pickedUpPiecePosition + " at coordinates " + localPosition);
 
         ChessPiece piece = chessBoard.GetPieceAt(pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2);
         if (piece != null)
@@ -128,6 +128,8 @@ public class Game : MonoBehaviour
                 Destroy(chessPieces[newPosition.Item1, newPosition.Item2]);
             }
             chessBoard.MovePiece(pickedUpPiecePosition, newPosition);
+            chessPieces[newPosition.Item1, newPosition.Item2] = chessPieces[pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2];
+            chessPieces[pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2] = null;
             Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + newPosition);
             chessBoard.PrintBoard();
             pickedUpPiecePosition = (-1, -1);
