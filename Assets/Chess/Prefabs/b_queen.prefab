@@ -154,10 +154,18 @@ PrefabInstance:
     - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
       propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4789767685660759046}
     - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 4789767685660759046}
+    - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: m_SelectExited.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPieceDrop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179263695728826658, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onPiecePickUp
       objectReference: {fileID: 0}
     - target: {fileID: 5828428182851058546, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
       propertyPath: m_Name
@@ -217,3 +225,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7750057461956999996, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
   m_PrefabInstance: {fileID: 8166632037780502023}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4789767685660759046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3687630903792591361, guid: 98303cbe01c68e546919b3424a13894e, type: 3}
+  m_PrefabInstance: {fileID: 8166632037780502023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58669004a7f6d94eab238a135ac3149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

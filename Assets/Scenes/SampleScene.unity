@@ -270,8 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbcf58eea4a77d48be797db4f313798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chessBoard: {fileID: 1856391622}
+  chessBoardObject: {fileID: 1241364534}
   playArea: {fileID: 1781921426}
+  possibleMove: {fileID: 3768733751920597100, guid: 5b9bf875754b6234c8151ab7f453efc2, type: 3}
   b_king: {fileID: 3220530950518378840, guid: c7134318cd86bde46b80b042c28bfdde, type: 3}
   b_queen: {fileID: 3220530950518378840, guid: a633baf04bc56d54a86dfdb67cced59d, type: 3}
   b_bishop: {fileID: 3220530950518378840, guid: 09d258e211564b84cb710f4add96de6e, type: 3}
@@ -299,6 +300,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1241364534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7853779882382936252, guid: a9872e569d4305a4aad3ced46cc7d49b, type: 3}
+  m_PrefabInstance: {fileID: 1439857236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1439857236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -337,11 +343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7596291981274657217, guid: a9872e569d4305a4aad3ced46cc7d49b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7596291981274657217, guid: a9872e569d4305a4aad3ced46cc7d49b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7596291981274657217, guid: a9872e569d4305a4aad3ced46cc7d49b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -449,17 +455,12 @@ Transform:
   m_GameObject: {fileID: 1781921426}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.28, z: 0}
   m_LocalScale: {x: 2.244, y: 1, z: 2.244}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1856391623}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1856391622 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7853779882382936252, guid: a9872e569d4305a4aad3ced46cc7d49b, type: 3}
-  m_PrefabInstance: {fileID: 1439857236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1856391623 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7596291981274657217, guid: a9872e569d4305a4aad3ced46cc7d49b, type: 3}

@@ -42,9 +42,9 @@ public class ChessPiece
         this.row = row;
     }
 
-    public void SetPosition(int x, int y) {
-        column = x;
-        row = y;
+    public void SetPosition((int, int) position) {
+        column = position.Item1;
+        row = position.Item2;
     }
 
     public HashSet<(int, int)> GetPossibleMoves(ChessBoard board) {
@@ -156,44 +156,36 @@ public class ChessPiece
                 } else {
                     return "♚";
                 }
-                break;
             case ChessType.Queen:
                 if (color == ChessColor.Black) {
                     return "♕";
                 } else {
                     return "♛";
                 }
-                break;
             case ChessType.Rook:
                 if (color == ChessColor.Black) {
                     return "♖";
                 } else {
                     return "♜";
                 }
-                break;
             case ChessType.Bishop:
                 if (color == ChessColor.Black) {
                     return "♗";
                 } else {
                     return "♝";
                 }
-                break;
             case ChessType.Knight:
                 if (color == ChessColor.Black) {
                     return "♘";
                 } else {
                     return "♞";
                 }
-                break;
             case ChessType.Pawn:
                 if (color == ChessColor.Black) {
                     return "♙";
                 } else {
                     return "♟";
                 }
-                break;
-            default:
-                break;
         }
         return "";
     }
