@@ -35,6 +35,7 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject w_pawn;
 
+    private ChessAI ai = new ChessAI(ChessColor.White, 3);
     private ChessBoard chessBoard = new ChessBoard();
     (int, int) pickedUpPiecePosition = (-1, -1);
     List<GameObject> possibleMoveObjects = new List<GameObject>();
@@ -136,6 +137,19 @@ public class Game : MonoBehaviour
             foreach (GameObject possibleMoveObject in possibleMoveObjects)
             {
                 Destroy(possibleMoveObject);
+            }
+
+            (int fromX, int fromY, int toX, int toY) = ai.GetBestMove(chessBoard);
+            if (fromX != -1 && fromY != -1 && toX != -1 && toY != -1)
+            {
+                Debug.Log("AI moved from " + fromX + ", " + fromY + " to " + toX + ", " + toY);
+                chessBoard.MovePiece((fromX, fromY), (toX, toY));
+                chessPieces[toX, toY] = chessPieces[fromX, fromY];
+                chessPieces[fromX, fromY] = null;
+            }
+            else
+            {
+                Debug.Log("AI could not find a move");
             }
         }
         else
