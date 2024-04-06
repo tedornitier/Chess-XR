@@ -144,6 +144,11 @@ public class Game : MonoBehaviour
             {
                 Debug.Log("AI moved from " + fromX + ", " + fromY + " to " + toX + ", " + toY);
                 chessBoard.MovePiece((fromX, fromY), (toX, toY));
+                if (chessBoard.GetPieceAt(toX, toY) != null)
+                {
+                    Destroy(chessPieces[toX, toY]);
+                }
+                chessPieces[fromX, fromY].transform.GetChild(0).localPosition = new Vector3((float)ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength()).Item1, 0.0f, (float)ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength()).Item2);
                 chessPieces[toX, toY] = chessPieces[fromX, fromY];
                 chessPieces[fromX, fromY] = null;
             }
