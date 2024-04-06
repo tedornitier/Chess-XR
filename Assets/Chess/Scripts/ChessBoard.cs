@@ -72,4 +72,29 @@ public class ChessBoard
         }
         Debug.Log(boardString);
     }
+
+    public (int, int) GetScores()
+    {
+        int whiteScore = 0;
+        int blackScore = 0;
+        for (int y = 0; y < 8; y++)
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                ChessPiece piece = GetPieceAt(x, y);
+                if (piece != null)
+                {
+                    if (piece.color == ChessColor.White)
+                    {
+                        whiteScore += piece.GetScore();
+                    }
+                    else
+                    {
+                        blackScore += piece.GetScore();
+                    }
+                }
+            }
+        }
+        return (whiteScore, blackScore);
+    }
 }

@@ -103,4 +103,23 @@ public class ChessBoardTests : MonoBehaviour
         Assert.AreEqual(board.GetPieceAt(1, 0), null);
         Assert.AreEqual(board.GetPieceAt(2, 2).type, ChessType.Knight);
     }
+
+    [Test]
+    public void GetScoresTest()
+    {
+        ChessBoard board = new ChessBoard();
+        Assert.AreEqual((0, 0), board.GetScores());
+        board.SetupBoard();
+        Assert.AreEqual((39, 39), board.GetScores());
+        board.RemovePiece((0, 0)); // black rook, 5 points
+        Assert.AreEqual((39, 34), board.GetScores());
+        board.RemovePiece((0, 1)); // black pawn, 1 point
+        Assert.AreEqual((39, 33), board.GetScores());
+        board.RemovePiece((3, 7)); // white queen, 9 points
+        Assert.AreEqual((30, 33), board.GetScores());
+        board.RemovePiece((1, 7)); // white knight, 3 points
+        Assert.AreEqual((27, 33), board.GetScores());
+        board.RemovePiece((2, 0)); // black bishop, 3 points
+        Assert.AreEqual((27, 30), board.GetScores());
+    }
 }

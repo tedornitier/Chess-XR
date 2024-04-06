@@ -189,4 +189,26 @@ public class ChessPiece
         }
         return "";
     }
+
+    public override string ToString() {
+        return GetSymbol();
+    }
+
+    public int GetScore() {
+        switch (type) {
+            case ChessType.King:
+                return 0;
+            case ChessType.Queen:
+                return 9;
+            case ChessType.Rook:
+                return 5;
+            case ChessType.Bishop:
+                return 3;
+            case ChessType.Knight:
+                return 3;
+            case ChessType.Pawn:
+                return 1;
+        }
+        return 0;
+    }
 }
