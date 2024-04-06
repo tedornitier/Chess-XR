@@ -111,9 +111,19 @@ public class Game : MonoBehaviour
         if (pickedUpPiecePosition != (-1, -1))
         {
             (int, int) newPosition = ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength());
+            if (newPosition == pickedUpPiecePosition)
+            {
+                Debug.Log("Piece was dropped at the same position");
+                pickedUpPiecePosition = (-1, -1);
+                foreach (GameObject possibleMoveObject in possibleMoveObjects)
+                {
+                    Destroy(possibleMoveObject);
+                }
+                return;
+            }
             if (chessBoard.GetPieceAt(newPosition.Item1, newPosition.Item2) != null)
             {
-                Debug.Log("Removed piece at " + newPosition);
+                Debug.Log("Captured piece at " + newPosition);
                 chessBoard.RemovePiece(newPosition);
                 Destroy(chessPieces[newPosition.Item1, newPosition.Item2]);
             }
