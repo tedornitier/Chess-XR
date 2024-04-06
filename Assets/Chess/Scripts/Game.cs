@@ -38,6 +38,7 @@ public class Game : MonoBehaviour
     private ChessBoard chessBoard = new ChessBoard();
     (int, int) pickedUpPiecePosition = (-1, -1);
     List<GameObject> possibleMoveObjects = new List<GameObject>();
+    private GameObject[,] chessPieces = new GameObject[8, 8];
 
     void Start()
     {
@@ -68,6 +69,7 @@ public class Game : MonoBehaviour
         {
             (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell(piece.Key, getPlayAreaLength());
             GameObject chessPieceGameObject = Instantiate(piece.Value, chessBoardObject.transform);
+            chessPieces[piece.Key.Item1, piece.Key.Item2] = chessPieceGameObject;
             chessPieceGameObject.transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.0f, (float)positionZ);
         }
     }
@@ -77,10 +79,12 @@ public class Game : MonoBehaviour
         return playArea.transform.localScale.x * playArea.GetComponent<MeshFilter>().mesh.bounds.size.x;
     }
 
-    public void onPiecePickUp(Vector3 position)
+    public void onPiecePickUp(Vector3 position, bool debug)
     {
         Vector3 localPosition = chessBoardObject.transform.InverseTransformPoint(position);
-        pickedUpPiecePosition = ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength());
+        Vector3 piecePosition = localPosition;
+        if (debug) { piecePosition = position; }
+        pickedUpPiecePosition = ChessUtils.CalculateCellPosition(piecePosition, getPlayAreaLength());
         Debug.Log("Piece picked up at " + pickedUpPiecePosition + " from " + localPosition);
 
         ChessPiece piece = chessBoard.GetPieceAt(pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2);
@@ -102,13 +106,19 @@ public class Game : MonoBehaviour
         possibleMoveObjects.Add(possibleMoveGameObject);
     }
 
-    public void onPieceDrop(Vector3 localPosition)
+    public void onPieceDrop(Vector3 localPosition, bool debug)
     {
-        Debug.Log("Piece dropped at " + localPosition);
         if (pickedUpPiecePosition != (-1, -1))
         {
-            Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + localPosition);
-            chessBoard.MovePiece(pickedUpPiecePosition, ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength()));
+            (int, int) newPosition = ChessUtils.CalculateCellPosition(localPosition, getPlayAreaLength());
+            if (chessBoard.GetPieceAt(newPosition.Item1, newPosition.Item2) != null)
+            {
+                Debug.Log("Removed piece at " + newPosition);
+                chessBoard.RemovePiece(newPosition);
+                Destroy(chessPieces[newPosition.Item1, newPosition.Item2]);
+            }
+            chessBoard.MovePiece(pickedUpPiecePosition, newPosition);
+            Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + newPosition);
             chessBoard.PrintBoard();
             pickedUpPiecePosition = (-1, -1);
             foreach (GameObject possibleMoveObject in possibleMoveObjects)
