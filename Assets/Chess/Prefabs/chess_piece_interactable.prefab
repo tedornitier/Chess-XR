@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58669004a7f6d94eab238a135ac3149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUp: 0
+  drop: 0
 --- !u!54 &4983101751426407749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,9 +127,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3687630903792591361}
-        m_TargetAssemblyTypeName: UnityChessPiece, Chess.Scripts
+        m_TargetAssemblyTypeName: InteractableChessPiece, Chess.Scripts
         m_MethodName: onPiecePickUp
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -140,9 +142,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3687630903792591361}
-        m_TargetAssemblyTypeName: UnityChessPiece, Chess.Scripts
+        m_TargetAssemblyTypeName: InteractableChessPiece, Chess.Scripts
         m_MethodName: onPieceDrop
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
