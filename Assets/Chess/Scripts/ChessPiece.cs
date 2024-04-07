@@ -55,13 +55,13 @@ public class ChessPiece
                 AddMoves(board, possibleMoves, kingMoves);
                 break;
             case ChessType.Queen:
-                AddMovesInAllDirections(board, possibleMoves, queenDirections);
+                AddMovesInDirections(board, possibleMoves, queenDirections);
                 break;
             case ChessType.Rook:
-                AddMovesInAllDirections(board, possibleMoves, rookDirections);
+                AddMovesInDirections(board, possibleMoves, rookDirections);
                 break;
             case ChessType.Bishop:
-                AddMovesInAllDirections(board, possibleMoves, bishopDirections);
+                AddMovesInDirections(board, possibleMoves, bishopDirections);
                 break;
             case ChessType.Knight:
                 AddMoves(board, possibleMoves, knightMoves);
@@ -90,7 +90,7 @@ public class ChessPiece
         }
     }
 
-    private void AddMovesInAllDirections(ChessBoard board, HashSet<(int, int)> possibleMoves, (int, int)[] directions) {
+    private void AddMovesInDirections(ChessBoard board, HashSet<(int, int)> possibleMoves, (int, int)[] directions) {
         foreach (var direction in directions) {
             GetMovesInDirection(board, possibleMoves, direction.Item1, direction.Item2);
         }
@@ -112,11 +112,11 @@ public class ChessPiece
             }
 
             int[] captureCols = { column - 1, column + 1 };
-            foreach (int col in captureCols) {
-                if (ChessBoard.IsWithinBounds(col, nextRow)) {
-                    ChessPiece targetPiece = board.GetPieceAt(col, nextRow);
+            foreach (int captureCol in captureCols) {
+                if (ChessBoard.IsWithinBounds(captureCol, nextRow)) {
+                    ChessPiece targetPiece = board.GetPieceAt(captureCol, nextRow);
                     if (targetPiece != null && targetPiece.color != color) {
-                        possibleMoves.Add((col, nextRow));
+                        possibleMoves.Add((captureCol, nextRow));
                     }
                 }
             }
