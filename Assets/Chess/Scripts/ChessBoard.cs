@@ -60,9 +60,15 @@ public class ChessBoard
 
     public void PrintBoard()
     {
-        string boardString = "";
+        string boardString = "\t";
+        for (int x = 7; x >= 0; x--)
+        {
+            boardString += x + "\t";
+        }
+        boardString += "\n";
         for (int y = 0; y < 8; y++)
         {
+            boardString += y + "\t";
             for (int x = 7; x >= 0; x--) // TODO the 3d board should be flipped
             {
                 ChessPiece piece = GetPieceAt(x, y);
