@@ -103,4 +103,21 @@ public class ChessBoard
         }
         return (whiteScore, blackScore);
     }
+
+    public ChessBoard Copy()
+    {
+        ChessBoard newBoard = new ChessBoard();
+        for (int x = 0; x < 8; x++)
+        {
+            for (int y = 0; y < 8; y++)
+            {
+                ChessPiece piece = GetPieceAt(x, y);
+                if (piece != null)
+                {
+                    newBoard.SetPieceAt((x, y), piece.Copy());
+                }
+            }
+        }
+        return newBoard;
+    }
 }

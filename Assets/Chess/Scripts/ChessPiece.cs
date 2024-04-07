@@ -8,8 +8,8 @@ public class ChessPiece
     [SerializeField]
     public ChessColor color;
 
-    int column = -1;
-    int row = -1;
+    public int column = -1;
+    public int row = -1;
 
     private static readonly (int, int)[] kingMoves = new (int, int)[] {
         (-1, -1), (-1, 0), (-1, 1), (0, -1),
@@ -210,5 +210,9 @@ public class ChessPiece
                 return 1;
         }
         return 0;
+    }
+
+    public ChessPiece Copy() {
+        return new ChessPiece(type, color, column, row);
     }
 }

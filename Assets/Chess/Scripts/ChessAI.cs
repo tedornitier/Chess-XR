@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ChessAI
 {
@@ -93,7 +94,7 @@ public class ChessAI
         return false;
     }
 
-    private List<(int, int, int, int)> GenerateLegalMoves(ChessBoard board)
+    public List<(int, int, int, int)> GenerateLegalMoves(ChessBoard board)
     {
         // Implement move generation logic
         List<(int, int, int, int)> legalMoves = new List<(int, int, int, int)>();
@@ -118,22 +119,7 @@ public class ChessAI
 
     private ChessBoard SimulateMove(ChessBoard board, (int, int, int, int) move)
     {
-        ChessBoard newBoard = new ChessBoard();
-        // Copy the board state to a new board
-        // Make the move on the new board
-        // Sample implementation
-        for (int x = 0; x < 8; x++)
-        {
-            for (int y = 0; y < 8; y++)
-            {
-                ChessPiece piece = board.GetPieceAt(x, y);
-                if (piece != null)
-                {
-                    newBoard.SetPieceAt((x, y), piece);
-                }
-            }
-        }
-        // Make the move
+        ChessBoard newBoard = board.Copy();
         newBoard.MovePiece((move.Item1, move.Item2), (move.Item3, move.Item4));
         return newBoard;
     }
