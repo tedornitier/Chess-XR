@@ -61,7 +61,7 @@ public class ChessBoard
     public void PrintBoard()
     {
         string boardString = "\t";
-        for (int x = 7; x >= 0; x--)
+        for (int x = 0; x < 8; x++)
         {
             boardString += x + "\t";
         }
@@ -69,7 +69,7 @@ public class ChessBoard
         for (int y = 0; y < 8; y++)
         {
             boardString += y + "\t";
-            for (int x = 7; x >= 0; x--) // TODO the 3d board should be flipped
+            for (int x = 0; x < 8; x++)
             {
                 ChessPiece piece = GetPieceAt(x, y);
                 boardString += ((piece == null) ? "□" : piece.GetSymbol()) + "\t";
