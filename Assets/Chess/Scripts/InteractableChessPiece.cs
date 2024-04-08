@@ -30,13 +30,11 @@ public class InteractableChessPiece : MonoBehaviour
 
     public void onPiecePickUp(bool debug = false)
     {
-        Debug.Log("onPiecePickUp");
         GameObject.Find("Game").GetComponent<Game>().onPiecePickUp(transform.localPosition, debug);
     }
 
     public void onPieceDrop(bool debug = false)
     {
-        Debug.Log("onPieceDrop");
         GameObject.Find("Game").GetComponent<Game>().onPieceDrop(transform.localPosition, debug);
     }
 }

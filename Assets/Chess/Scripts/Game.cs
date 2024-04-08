@@ -35,7 +35,7 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject w_pawn;
 
-    private ChessAI ai = new ChessAI(ChessColor.White, 3);
+    private ChessAI ai = new ChessAI(ChessColor.Black, 3);
     private ChessBoard chessBoard = new ChessBoard();
     (int, int) pickedUpPiecePosition = (-1, -1);
     List<GameObject> possibleMoveObjects = new List<GameObject>();
@@ -86,7 +86,7 @@ public class Game : MonoBehaviour
         Vector3 piecePosition = localPosition;
         if (debug) { piecePosition = position; }
         pickedUpPiecePosition = ChessUtils.CalculateCellPosition(piecePosition, getPlayAreaLength());
-        Debug.Log("Piece picked up at " + pickedUpPiecePosition + " at coordinates " + localPosition);
+        // Debug.Log("Piece picked up at " + pickedUpPiecePosition + " at coordinates " + localPosition);
 
         ChessPiece piece = chessBoard.GetPieceAt(pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2);
         if (piece != null)
@@ -124,14 +124,14 @@ public class Game : MonoBehaviour
             }
             if (chessBoard.GetPieceAt(newPosition.Item1, newPosition.Item2) != null)
             {
-                Debug.Log("Captured piece at " + newPosition);
+                // Debug.Log("Captured piece at " + newPosition);
                 chessBoard.RemovePiece(newPosition);
                 Destroy(chessPieces[newPosition.Item1, newPosition.Item2]);
             }
             chessBoard.MovePiece(pickedUpPiecePosition, newPosition);
             chessPieces[newPosition.Item1, newPosition.Item2] = chessPieces[pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2];
             chessPieces[pickedUpPiecePosition.Item1, pickedUpPiecePosition.Item2] = null;
-            Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + newPosition);
+            // Debug.Log("Piece moved from " + pickedUpPiecePosition + " to " + newPosition);
             chessBoard.PrintBoard();
             pickedUpPiecePosition = (-1, -1);
             foreach (GameObject possibleMoveObject in possibleMoveObjects)
@@ -142,7 +142,7 @@ public class Game : MonoBehaviour
             (int fromX, int fromY, int toX, int toY) = ai.GetBestMove(chessBoard);
             if (fromX != -1 && fromY != -1 && toX != -1 && toY != -1)
             {
-                Debug.Log("AI moved from " + fromX + ", " + fromY + " to " + toX + ", " + toY);
+                // Debug.Log("AI moved from " + fromX + ", " + fromY + " to " + toX + ", " + toY);
                 chessBoard.MovePiece((fromX, fromY), (toX, toY));
                 if (chessBoard.GetPieceAt(toX, toY) != null)
                 {
@@ -151,6 +151,7 @@ public class Game : MonoBehaviour
                 chessPieces[fromX, fromY].transform.GetChild(0).localPosition = new Vector3((float)ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength()).Item1, 0.0f, (float)ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength()).Item2);
                 chessPieces[toX, toY] = chessPieces[fromX, fromY];
                 chessPieces[fromX, fromY] = null;
+                chessBoard.PrintBoard();
             }
             else
             {
