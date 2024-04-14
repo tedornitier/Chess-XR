@@ -35,21 +35,44 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject w_pawn;
 
-    private ChessAI ai = new ChessAI(ChessColor.Black, 3);
+    private ChessAI whiteAI = new ChessAI(ChessColor.White, 7);
+    private ChessAI blackAI = new ChessAI(ChessColor.Black, 6);
     private ChessBoard chessBoard = new ChessBoard();
     (int, int) pickedUpPiecePosition = (-1, -1);
     List<GameObject> possibleMoveObjects = new List<GameObject>();
     private GameObject[,] chessPieces = new GameObject[8, 8];
+    private Queue<GameObject> piecesToDestroy = new Queue<GameObject>();
+    private Queue<(int, int, int, int)> piecesToMove = new Queue<(int, int, int, int)>();
 
     void Start()
     {
         chessBoard.SetupBoard();
         ArrangeChessBoard();
+
+        System.Threading.Tasks.Task.Run(() => {
+            while (true)
+            {
+                Debug.Log("Playing white AI move");
+                PlayAIMove(whiteAI);
+                Debug.Log("Playing black AI move");
+                PlayAIMove(blackAI);
+            }
+        });
     }
 
     void Update()
     {
-        
+        if (piecesToDestroy.Count > 0)
+        {
+            GameObject piece = piecesToDestroy.Dequeue();
+            Destroy(piece);
+        }
+        if (piecesToMove.Count > 0)
+        {
+            (int fromX, int fromY, int toX, int toY) = piecesToMove.Dequeue();
+            (double positionX, double positionZ) = ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength());
+            chessPieces[toX, toY].transform.GetChild(0).localPosition = new Vector3((float)positionX, 0.0f, (float)positionZ);
+        }
     }
 
     void ArrangeChessBoard()
@@ -139,28 +162,34 @@ public class Game : MonoBehaviour
                 Destroy(possibleMoveObject);
             }
 
-            (int fromX, int fromY, int toX, int toY) = ai.GetBestMove(chessBoard);
-            if (fromX != -1 && fromY != -1 && toX != -1 && toY != -1)
-            {
-                // Debug.Log("AI moved from " + fromX + ", " + fromY + " to " + toX + ", " + toY);
-                chessBoard.MovePiece((fromX, fromY), (toX, toY));
-                if (chessBoard.GetPieceAt(toX, toY) != null)
-                {
-                    Destroy(chessPieces[toX, toY]);
-                }
-                chessPieces[fromX, fromY].transform.GetChild(0).localPosition = new Vector3((float)ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength()).Item1, 0.0f, (float)ChessUtils.GetPieceCoordinateFromCell((toX, toY), getPlayAreaLength()).Item2);
-                chessPieces[toX, toY] = chessPieces[fromX, fromY];
-                chessPieces[fromX, fromY] = null;
-                chessBoard.PrintBoard();
-            }
-            else
-            {
-                Debug.Log("AI could not find a move");
-            }
+            PlayAIMove(whiteAI);
         }
         else
         {
             Debug.Log("No piece was picked up");
+        }
+    }
+
+    private void PlayAIMove(ChessAI ai)
+    {
+        Debug.Log(ai.aiColor + " AI is thinking...");
+        (int fromX, int fromY, int toX, int toY) = ai.GetBestMove(chessBoard);
+        if (fromX != -1 && fromY != -1 && toX != -1 && toY != -1)
+        {
+            Debug.Log(ai.aiColor + " moved from " + fromX + ", " + fromY + " to " + toX + ", " + toY);
+            chessBoard.MovePiece((fromX, fromY), (toX, toY));
+            if (chessBoard.GetPieceAt(toX, toY) != null)
+            {
+                piecesToDestroy.Enqueue(chessPieces[toX, toY]);
+            }
+            piecesToMove.Enqueue((fromX, fromY, toX, toY));
+            chessPieces[toX, toY] = chessPieces[fromX, fromY];
+            chessPieces[fromX, fromY] = null;
+            chessBoard.PrintBoard();
+        }
+        else
+        {
+            Debug.Log(ai.aiColor + " AI could not find a move");
         }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ChessAI
 {
-    private ChessColor aiColor;
+    public ChessColor aiColor;
     private int maxDepth;
 
-    public ChessAI(ChessColor aiColor, int maxDepth = 2)
+    public ChessAI(ChessColor aiColor, int maxDepth)
     {
         this.aiColor = aiColor;
         this.maxDepth = maxDepth;
