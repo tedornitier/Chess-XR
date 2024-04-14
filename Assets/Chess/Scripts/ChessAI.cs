@@ -7,7 +7,7 @@ public class ChessAI
     private ChessColor aiColor;
     private int maxDepth;
 
-    public ChessAI(ChessColor aiColor, int maxDepth = 3)
+    public ChessAI(ChessColor aiColor, int maxDepth = 2)
     {
         this.aiColor = aiColor;
         this.maxDepth = maxDepth;
