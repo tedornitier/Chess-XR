@@ -25,7 +25,6 @@ public class ChessAI
 
         if (depth == 0 || IsTerminalNode(board))
         {
-            return (Evaluate(board), -1, -1, -1, -1); // Evaluation function here
             return (Evaluate(board), -1, -1, -1, -1);
         }
 
@@ -37,10 +36,7 @@ public class ChessAI
         foreach ((int fromX, int fromY, int toX, int toY) in legalMoves)
         {
             ChessBoard newBoard = SimulateMove(board, (fromX, fromY, toX, toY));
-                int eval = Minimax(newBoard, depth - 1, alpha, beta, false).Item1;
-                if (eval > maxEval)
             int eval = Minimax(newBoard, depth - 1, alpha, beta, !maximizingPlayer).Item1;
-                    maxEval = eval;
 
             if ((maximizingPlayer && eval > bestEval) || (!maximizingPlayer && eval < bestEval))
             {
@@ -65,12 +61,7 @@ public class ChessAI
 
     private bool IsTerminalNode(ChessBoard board)
     {
-        // Check if the game is in checkmate or stalemate
-        bool isCheckmate = IsCheckmate(board);
-        bool isStalemate = IsStalemate(board);
-
-        // Return true if either condition is met
-        return isCheckmate || isStalemate;
+        return IsCheckmate(board) || IsStalemate(board);
     }
 
     private bool IsCheckmate(ChessBoard board)
@@ -85,17 +76,15 @@ public class ChessAI
         return false;
     }
 
-    public List<(int, int, int, int)> GenerateLegalMoves(ChessBoard board)
+    public List<(int, int, int, int)> GenerateLegalMoves(ChessBoard board, ChessColor currentPlayerColor)
     {
-        // Implement move generation logic
         List<(int, int, int, int)> legalMoves = new List<(int, int, int, int)>();
-        // Sample implementation
         for (int x = 0; x < 8; x++)
         {
             for (int y = 0; y < 8; y++)
             {
                 ChessPiece piece = board.GetPieceAt(x, y);
-                if (piece != null && piece.color == aiColor)
+                if (piece != null && piece.color == currentPlayerColor)
                 {
                     HashSet<(int, int)> possibleMoves = piece.GetPossibleMoves(board);
                     foreach ((int, int) move in possibleMoves)
@@ -108,22 +97,22 @@ public class ChessAI
         return legalMoves;
     }
 
-    private ChessBoard SimulateMove(ChessBoard board, (int, int, int, int) move)
+    // TODO private
+    public ChessBoard SimulateMove(ChessBoard board, (int, int, int, int) move)
     {
         ChessBoard newBoard = board.Copy();
         newBoard.MovePiece((move.Item1, move.Item2), (move.Item3, move.Item4));
         return newBoard;
     }
 
-    private int Evaluate(ChessBoard board)
+    // TODO private
+    public int Evaluate(ChessBoard board)
     {
         (int whiteScore, int blackScore) = board.GetScores();
 
-        // Adjust the scores based on the AI's color
         int aiScore = (aiColor == ChessColor.White) ? whiteScore : blackScore;
         int opponentScore = (aiColor == ChessColor.White) ? blackScore : whiteScore;
 
-        // Return the difference in scores as the evaluation
         return aiScore - opponentScore;
     }
 }
