@@ -60,7 +60,7 @@ public class ChessBoard
 
     public void PrintBoard()
     {
-        string boardString = "\t";
+        string boardString = ".\t";
         for (int x = 0; x < 8; x++)
         {
             boardString += x + "\t";

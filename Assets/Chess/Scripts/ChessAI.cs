@@ -21,55 +21,46 @@ public class ChessAI
 
     private (int, int, int, int, int) Minimax(ChessBoard board, int depth, int alpha, int beta, bool maximizingPlayer)
     {
+        ChessColor currentPlayerColor = maximizingPlayer ? aiColor : (aiColor == ChessColor.White ? ChessColor.Black : ChessColor.White);
+
         if (depth == 0 || IsTerminalNode(board))
         {
             return (Evaluate(board), -1, -1, -1, -1); // Evaluation function here
+            return (Evaluate(board), -1, -1, -1, -1);
         }
 
-        List<(int, int, int, int)> legalMoves = GenerateLegalMoves(board);
+        List<(int, int, int, int)> legalMoves = GenerateLegalMoves(board, currentPlayerColor);
 
-        if (maximizingPlayer)
+        int bestEval = maximizingPlayer ? int.MinValue : int.MaxValue;
+        (int, int, int, int) bestMove = (-1, -1, -1, -1);
+
+        foreach ((int fromX, int fromY, int toX, int toY) in legalMoves)
         {
-            int maxEval = int.MinValue;
-            (int, int, int, int) bestMove = (-1, -1, -1, -1);
-
-            foreach ((int fromX, int fromY, int toX, int toY) in legalMoves)
-            {
-                ChessBoard newBoard = SimulateMove(board, (fromX, fromY, toX, toY));
+            ChessBoard newBoard = SimulateMove(board, (fromX, fromY, toX, toY));
                 int eval = Minimax(newBoard, depth - 1, alpha, beta, false).Item1;
                 if (eval > maxEval)
-                {
+            int eval = Minimax(newBoard, depth - 1, alpha, beta, !maximizingPlayer).Item1;
                     maxEval = eval;
-                    bestMove = (fromX, fromY, toX, toY);
-                }
-                alpha = Math.Max(alpha, eval);
-                if (beta <= alpha)
-                    break;
-            }
 
-            return (maxEval, bestMove.Item1, bestMove.Item2, bestMove.Item3, bestMove.Item4);
-        }
-        else
-        {
-            int minEval = int.MaxValue;
-            (int, int, int, int) bestMove = (-1, -1, -1, -1);
-
-            foreach ((int fromX, int fromY, int toX, int toY) in legalMoves)
+            if ((maximizingPlayer && eval > bestEval) || (!maximizingPlayer && eval < bestEval))
             {
-                ChessBoard newBoard = SimulateMove(board, (fromX, fromY, toX, toY));
-                int eval = Minimax(newBoard, depth - 1, alpha, beta, true).Item1;
-                if (eval < minEval)
-                {
-                    minEval = eval;
-                    bestMove = (fromX, fromY, toX, toY);
-                }
-                beta = Math.Min(beta, eval);
-                if (beta <= alpha)
-                    break;
+                bestEval = eval;
+                bestMove = (fromX, fromY, toX, toY);
             }
 
-            return (minEval, bestMove.Item1, bestMove.Item2, bestMove.Item3, bestMove.Item4);
+            if (maximizingPlayer)
+            {
+                alpha = Math.Max(alpha, eval);
+                if (beta <= alpha) break;
+            }
+            else
+            {
+                beta = Math.Min(beta, eval);
+                if (beta <= alpha) break;
+            }
         }
+
+        return (bestEval, bestMove.Item1, bestMove.Item2, bestMove.Item3, bestMove.Item4);
     }
 
     private bool IsTerminalNode(ChessBoard board)
