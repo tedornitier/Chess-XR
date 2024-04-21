@@ -136,7 +136,7 @@ public class ChessAI
                 chainLength += GetPawnChainLength(board, neighbor);
     }
 
-    private bool IsCheck(ChessBoard board)
+    public bool IsCheck(ChessBoard board)
     {
         // Find the current player's king
         ChessPiece king = board.GetPieces(board.currentPlayer).Find(piece => piece.type == ChessType.King);

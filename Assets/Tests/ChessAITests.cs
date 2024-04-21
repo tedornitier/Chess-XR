@@ -91,4 +91,20 @@ public class ChessAITests
         Assert.AreEqual(3, ai.GetPawnChainLength(board, pawn));
         Assert.AreEqual(2, ai.GetPawnChainLength(board, otherPawn));
     }
+
+    [Test]
+    public void IsCheckTest()
+    {
+        ChessAI ai = new ChessAI(ChessColor.White, 2);
+        ChessBoard board = new ChessBoard();
+        board.SetPieceAt((0, 0), new ChessPiece(ChessType.King, ChessColor.White));
+        board.SetPieceAt((1, 1), new ChessPiece(ChessType.Rook, ChessColor.Black));
+        board.SetPieceAt((1, 2), new ChessPiece(ChessType.King, ChessColor.Black));
+        board.PrintBoard();
+        Assert.IsFalse(ai.IsCheck(board));
+
+        board.MovePiece((1, 1), (1, 0));
+        board.PrintBoard();
+        Assert.IsTrue(ai.IsCheck(board));
+    }
 }
