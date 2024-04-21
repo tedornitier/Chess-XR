@@ -7,6 +7,8 @@ public class ChessAI
     public ChessColor aiColor;
     private int maxDepth;
 
+    private HashSet<ChessPiece> visitedPawns = new HashSet<ChessPiece>(); // TODO should it be a class member?
+
     public ChessAI(ChessColor aiColor, int maxDepth)
     {
         this.aiColor = aiColor;
