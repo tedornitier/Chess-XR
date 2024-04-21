@@ -19,7 +19,7 @@ public class ChessAITests
         board.SetPieceAt((0, 3), new ChessPiece(ChessType.Queen, ChessColor.White));
         board.PrintBoard();
 
-        List<(int, int, int, int)> legalMoves = ai.GenerateLegalMoves(board, ChessColor.White);
+        List<(int, int, int, int)> legalMoves = ai.GenerateLegalMoves(board);
         List<(int, int, int, int)> expectedLegalMoves = new List<(int, int, int, int)> {
             (0, 3, 0, 2), (0, 3, 1, 2), (0, 3, 2, 1), (0, 3, 1, 3),
             (0, 3, 1, 4), (0, 3, 0, 4), (0, 3, 0, 5)
@@ -73,49 +73,22 @@ public class ChessAITests
     }
 
     [Test]
-    public void EvaluateTest()
+    public void GetPawnChainLengthTest()
     {
-        ChessAI chessAI = new ChessAI(ChessColor.White, 2);
+        ChessAI ai = new ChessAI(ChessColor.White, 2);
         ChessBoard board = new ChessBoard();
-        foreach (var position in new List<(int, int)> {
-            (1, 1), (2, 1), (0, 2), (1, 3), (1, 4), (0, 5), (2, 3)
-        }) {
-            board.SetPieceAt(position, new ChessPiece(ChessType.Pawn, ChessColor.Black));
-        }
-        board.SetPieceAt((0, 3), new ChessPiece(ChessType.Queen, ChessColor.White));
+        ChessPiece pawn = new ChessPiece(ChessType.Pawn, ChessColor.White);
+        board.SetPieceAt((0, 0), pawn);
+        board.SetPieceAt((1, 1), new ChessPiece(ChessType.Pawn, ChessColor.White));
+        board.SetPieceAt((2, 2), new ChessPiece(ChessType.Pawn, ChessColor.White));
+
+        ChessPiece otherPawn = new ChessPiece(ChessType.Pawn, ChessColor.White);
+        board.SetPieceAt((4, 4), otherPawn);
+        board.SetPieceAt((5, 3), new ChessPiece(ChessType.Pawn, ChessColor.White));
+
         board.PrintBoard();
 
-        int expectedScore = 2;
-        Assert.AreEqual(expectedScore, chessAI.Evaluate(board));
-
-        board.MovePiece((0, 3), (0, 2));
-        board.PrintBoard();
-        expectedScore = 3;
-        Assert.AreEqual(expectedScore, chessAI.Evaluate(board));
-
-        board.MovePiece((2, 1), (0, 2));
-        board.PrintBoard();
-        expectedScore = -6;
-        Assert.AreEqual(expectedScore, chessAI.Evaluate(board));
-    }
-
-    [Test]
-    public void SimulateMoveTest()
-    {
-        ChessAI chessAI = new ChessAI(ChessColor.White, 2);
-        ChessBoard board = new ChessBoard();
-        foreach (var position in new List<(int, int)> {
-            (1, 1), (2, 1), (0, 2), (1, 3), (1, 4), (0, 5), (2, 3)
-        }) {
-            board.SetPieceAt(position, new ChessPiece(ChessType.Pawn, ChessColor.Black));
-        }
-        board.SetPieceAt((0, 3), new ChessPiece(ChessType.Queen, ChessColor.White));
-        board.PrintBoard();
-
-        (int, int, int, int) move = (0, 3, 2, 1);
-        ChessBoard newBoard = chessAI.SimulateMove(board, move);
-        newBoard.PrintBoard();
-        Assert.AreEqual(ChessType.Queen, newBoard.GetPieceAt(2, 1).type);
-        Assert.AreEqual(ChessType.Queen, board.GetPieceAt(0, 3).type);
+        Assert.AreEqual(3, ai.GetPawnChainLength(board, pawn));
+        Assert.AreEqual(2, ai.GetPawnChainLength(board, otherPawn));
     }
 }

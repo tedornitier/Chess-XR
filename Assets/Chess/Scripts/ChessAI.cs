@@ -115,4 +115,23 @@ public class ChessAI
 
         return aiScore - opponentScore;
     }
+    public int GetPawnChainLength(ChessBoard board, ChessPiece pawn)
+    {
+        // Recursively find the length of the pawn chain starting from the specified pawn
+        int chainLength = 1; // Pawn itself is part of the chain
+
+        // Add the current pawn to the visited set
+        visitedPawns.Add(pawn);
+
+        // Get neighboring pawns of the same color
+        List<ChessPiece> neighbors = board.GetAdjacentPieces((pawn.column, pawn.row));
+        neighbors = neighbors.FindAll(neighbor => neighbor != null && neighbor.color == pawn.color && neighbor.type == ChessType.Pawn);
+
+        // Iterate over neighboring pawns and recursively find chain length
+        foreach (var neighbor in neighbors)
+        {
+            // Only visit the neighbor if it hasn't been visited yet
+            if (!visitedPawns.Contains(neighbor))
+                chainLength += GetPawnChainLength(board, neighbor);
+    }
 }
