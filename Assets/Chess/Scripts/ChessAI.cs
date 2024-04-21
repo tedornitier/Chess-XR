@@ -115,6 +115,7 @@ public class ChessAI
 
         return aiScore - opponentScore;
     }
+
     public int GetPawnChainLength(ChessBoard board, ChessPiece pawn)
     {
         // Recursively find the length of the pawn chain starting from the specified pawn
@@ -133,5 +134,22 @@ public class ChessAI
             // Only visit the neighbor if it hasn't been visited yet
             if (!visitedPawns.Contains(neighbor))
                 chainLength += GetPawnChainLength(board, neighbor);
+    }
+
+    private bool IsCheck(ChessBoard board)
+    {
+        // Find the current player's king
+        ChessPiece king = board.GetPieces(board.currentPlayer).Find(piece => piece.type == ChessType.King);
+
+        // Check if the king is under attack by any enemy piece
+        foreach (var piece in board.GetPieces(board.currentPlayer == ChessColor.White ? ChessColor.Black : ChessColor.White))
+        {
+            if (piece.GetPossibleMoves(board).Contains((king.column, king.row)))
+            {
+                return true; // King is under attack
+            }
+        }
+
+        return false; // King is not under attack
     }
 }
