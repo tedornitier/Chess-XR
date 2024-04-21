@@ -81,7 +81,7 @@ public class ChessPiece
         foreach (var move in moves) {
             int newX = column + move.Item1;
             int newY = row + move.Item2;
-            if (ChessBoard.IsWithinBounds(newX, newY)) {
+            if (board.IsWithinBounds(newX, newY)) {
                 ChessPiece targetPiece = board.GetPieceAt(newX, newY);
                 if (targetPiece == null || targetPiece.color != color) {
                     possibleMoves.Add((newX, newY));
@@ -102,18 +102,18 @@ public class ChessPiece
         int nextRow = row + direction;
         int nextNextRow = row + 2 * direction;
 
-        if (ChessBoard.IsWithinBounds(column, nextRow)) {
+        if (board.IsWithinBounds(column, nextRow)) {
             if (board.GetPieceAt(column, nextRow) == null) {
                 possibleMoves.Add((column, nextRow));
 
-                if (row == initialRow && ChessBoard.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
+                if (row == initialRow && board.IsWithinBounds(column, nextNextRow) && board.GetPieceAt(column, nextNextRow) == null) {
                     possibleMoves.Add((column, nextNextRow));
                 }
             }
 
             int[] captureCols = { column - 1, column + 1 };
             foreach (int captureCol in captureCols) {
-                if (ChessBoard.IsWithinBounds(captureCol, nextRow)) {
+                if (board.IsWithinBounds(captureCol, nextRow)) {
                     ChessPiece targetPiece = board.GetPieceAt(captureCol, nextRow);
                     if (targetPiece != null && targetPiece.color != color) {
                         possibleMoves.Add((captureCol, nextRow));
@@ -129,7 +129,7 @@ public class ChessPiece
         int x = column + dx;
         int y = row + dy;
 
-        while (ChessBoard.IsWithinBounds(x, y)) {
+        while (board.IsWithinBounds(x, y)) {
             ChessPiece targetPiece = board.GetPieceAt(x, y);
 
             // Check if the target square is empty or has an opponent's piece
@@ -197,7 +197,7 @@ public class ChessPiece
     public int GetScore() {
         switch (type) {
             case ChessType.King:
-                return 0;
+                return 9999;
             case ChessType.Queen:
                 return 9;
             case ChessType.Rook:
