@@ -8,12 +8,13 @@ public class ChessBoardTests : MonoBehaviour
     [Test]
     public void IsWithinBoundsTest()
     {
-        Assert.IsTrue(ChessBoard.IsWithinBounds(0, 0));
-        Assert.IsTrue(ChessBoard.IsWithinBounds(7, 7));
-        Assert.IsFalse(ChessBoard.IsWithinBounds(-1, 0));
-        Assert.IsFalse(ChessBoard.IsWithinBounds(0, -1));
-        Assert.IsFalse(ChessBoard.IsWithinBounds(8, 0));
-        Assert.IsFalse(ChessBoard.IsWithinBounds(0, 8));
+        ChessBoard board = new ChessBoard();
+        Assert.IsTrue(board.IsWithinBounds(0, 0));
+        Assert.IsTrue(board.IsWithinBounds(7, 7));
+        Assert.IsFalse(board.IsWithinBounds(-1, 0));
+        Assert.IsFalse(board.IsWithinBounds(0, -1));
+        Assert.IsFalse(board.IsWithinBounds(8, 0));
+        Assert.IsFalse(board.IsWithinBounds(0, 8));
     }
 
     [Test]

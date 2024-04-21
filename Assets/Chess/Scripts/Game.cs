@@ -35,8 +35,8 @@ public class Game : MonoBehaviour
     [SerializeField]
     private GameObject w_pawn;
 
-    private ChessAI whiteAI = new ChessAI(ChessColor.White, 7);
-    private ChessAI blackAI = new ChessAI(ChessColor.Black, 6);
+    private ChessAI whiteAI = new ChessAI(ChessColor.White, 4);
+    private ChessAI blackAI = new ChessAI(ChessColor.Black, 3);
     private ChessBoard chessBoard = new ChessBoard();
     (int, int) pickedUpPiecePosition = (-1, -1);
     List<GameObject> possibleMoveObjects = new List<GameObject>();
@@ -49,7 +49,6 @@ public class Game : MonoBehaviour
         chessBoard.SetupBoard();
         ArrangeChessBoard();
 
-        System.Threading.Tasks.Task.Run(() => {
             while (true)
             {
                 Debug.Log("Playing white AI move");
@@ -57,7 +56,6 @@ public class Game : MonoBehaviour
                 Debug.Log("Playing black AI move");
                 PlayAIMove(blackAI);
             }
-        });
     }
 
     void Update()
