@@ -4,10 +4,28 @@ using System.Collections.Generic;
 public class ChessBoard
 {
     private ChessPiece[,] board = new ChessPiece[8, 8];
+    public ChessColor currentPlayer = ChessColor.White;
 
     public ChessPiece GetPieceAt(int x, int y)
     {
         return board[x, y];
+    }
+
+    public List<ChessPiece> GetPieces(ChessColor color)
+    {
+        List<ChessPiece> pieces = new List<ChessPiece>();
+        for (int y = 0; y < 8; y++)
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                ChessPiece piece = GetPieceAt(x, y);
+                if (piece != null && piece.color == color)
+                {
+                    pieces.Add(piece);
+                }
+            }
+        }
+        return pieces;
     }
 
     public void SetPieceAt((int, int) position, ChessPiece piece)
