@@ -133,7 +133,12 @@ public class ChessAI
         {
             // Only visit the neighbor if it hasn't been visited yet
             if (!visitedPawns.Contains(neighbor))
+            {
                 chainLength += GetPawnChainLength(board, neighbor);
+            }
+        }
+
+        return chainLength;
     }
 
     public bool IsCheck(ChessBoard board)
@@ -151,5 +156,49 @@ public class ChessAI
         }
 
         return false; // King is not under attack
+    }
+
+    public int EvaluateControlOfCenter(ChessBoard board, ChessColor color)
+    {
+        int controlOfCenter = 0;
+
+        // Define central squares
+        int[] centerSquaresX = { 3, 4 };
+        int[] centerSquaresY = { 3, 4 };
+
+        foreach (int x in centerSquaresX)
+        {
+            foreach (int y in centerSquaresY)
+            {
+                ChessPiece piece = board.GetPieceAt(x, y);
+                if (piece != null && piece.color == color)
+                {
+                    // Assign different weights based on piece type
+                    switch (piece.type)
+                    {
+                        case ChessType.Pawn:
+                            controlOfCenter += 1;
+                            break;
+                        case ChessType.Knight:
+                            controlOfCenter += 3;
+                            break;
+                        case ChessType.Bishop:
+                            controlOfCenter += 3;
+                            break;
+                        case ChessType.Rook:
+                            controlOfCenter += 2;
+                            break;
+                        case ChessType.Queen:
+                            controlOfCenter += 4;
+                            break;
+                        case ChessType.King:
+                            controlOfCenter += 5;
+                            break;
+                    }
+                }
+            }
+        }
+
+        return controlOfCenter;
     }
 }

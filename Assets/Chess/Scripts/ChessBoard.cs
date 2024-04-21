@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ChessBoard
 {
@@ -120,4 +121,33 @@ public class ChessBoard
         }
         return newBoard;
     }
+
+    public List<ChessPiece> GetAdjacentPieces((int, int) position)
+    {
+        List<ChessPiece> adjacentPieces = new List<ChessPiece>();
+
+        int[][] directions = {
+            new int[] {-1, -1}, new int[] {0, -1}, new int[] {1, -1},
+            new int[] {-1, 0}, new int[] {1, 0},
+            new int[] {-1, 1}, new int[] {0, 1}, new int[] {1, 1}
+        };
+
+        foreach (var direction in directions)
+        {
+            int x = position.Item1 + direction[0];
+            int y = position.Item2 + direction[1];
+
+            if (IsWithinBounds(x, y))
+            {
+                ChessPiece piece = GetPieceAt(x, y);
+                if (piece != null)
+                {
+                    adjacentPieces.Add(piece);
+                }
+            }
+        }
+
+        return adjacentPieces;
+    }
+
 }

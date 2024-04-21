@@ -107,4 +107,33 @@ public class ChessAITests
         board.PrintBoard();
         Assert.IsTrue(ai.IsCheck(board));
     }
+
+    [Test]
+    public void EvaluateControlOfCenterTest()
+    {
+        // center squares are (3, 3), (3, 4), (4, 3), (4, 4)
+        // the values for each piece in the center are:
+        // pawn: 1, knight: 3, bishop: 3, rook: 2, queen: 4, king: 5
+        ChessAI ai = new ChessAI(ChessColor.White, 2);
+        ChessBoard board = new ChessBoard();
+        Assert.AreEqual(0, ai.EvaluateControlOfCenter(board, ChessColor.White));
+        board.SetPieceAt((3, 3), new ChessPiece(ChessType.Pawn, ChessColor.White)); // +1
+        board.PrintBoard();
+        Assert.AreEqual(1, ai.EvaluateControlOfCenter(board, ChessColor.White));
+        board.SetPieceAt((3, 4), new ChessPiece(ChessType.Knight, ChessColor.White)); // +3
+        board.PrintBoard();
+        Assert.AreEqual(4, ai.EvaluateControlOfCenter(board, ChessColor.White));
+        board.SetPieceAt((4, 3), new ChessPiece(ChessType.Bishop, ChessColor.White)); // +3
+        board.PrintBoard();
+        Assert.AreEqual(7, ai.EvaluateControlOfCenter(board, ChessColor.White));
+        board.SetPieceAt((4, 4), new ChessPiece(ChessType.Rook, ChessColor.White)); // +2
+        board.PrintBoard();
+        Assert.AreEqual(9, ai.EvaluateControlOfCenter(board, ChessColor.White));
+        board.SetPieceAt((3, 3), new ChessPiece(ChessType.Queen, ChessColor.White)); // replacing pawn (1) with queen (4), +3
+        board.PrintBoard();
+        Assert.AreEqual(12, ai.EvaluateControlOfCenter(board, ChessColor.White));
+        board.SetPieceAt((3, 4), new ChessPiece(ChessType.Pawn, ChessColor.Black)); // removing knight (3), -3
+        board.PrintBoard();
+        Assert.AreEqual(9, ai.EvaluateControlOfCenter(board, ChessColor.White));
+    }
 }
