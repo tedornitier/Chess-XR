@@ -95,7 +95,7 @@ public class ChessAI
         return false;
     }
 
-    public List<(int, int, int, int)> GenerateLegalMoves(ChessBoard board, ChessColor currentPlayerColor)
+    public List<(int, int, int, int)> GenerateLegalMoves(ChessBoard board, ChessColor player)
     {
         List<(int, int, int, int)> legalMoves = new List<(int, int, int, int)>();
         for (int x = 0; x < 8; x++)
@@ -103,7 +103,7 @@ public class ChessAI
             for (int y = 0; y < 8; y++)
             {
                 ChessPiece piece = board.GetPieceAt(x, y);
-                if (piece != null && piece.color == currentPlayerColor)
+                if (piece != null && piece.color == player)
                 {
                     HashSet<(int, int)> possibleMoves = piece.GetPossibleMoves(board);
                     foreach ((int, int) move in possibleMoves)
@@ -116,8 +116,7 @@ public class ChessAI
         return legalMoves;
     }
 
-    // TODO private
-    public ChessBoard SimulateMove(ChessBoard board, (int, int, int, int) move)
+    private ChessBoard SimulateMove(ChessBoard board, (int, int, int, int) move)
     {
         ChessBoard newBoard = board.Copy();
         newBoard.MovePiece((move.Item1, move.Item2), (move.Item3, move.Item4));
@@ -164,6 +163,7 @@ public class ChessAI
     {
         // Find the current player's king
         ChessPiece king = board.GetPieces(board.currentPlayer).Find(piece => piece.type == ChessType.King);
+        if (king == null) return false;
 
         // Check if the king is under attack by any enemy piece
         foreach (var piece in board.GetPieces(board.currentPlayer == ChessColor.White ? ChessColor.Black : ChessColor.White))
