@@ -89,9 +89,31 @@ public class ChessAI
         return true;
     }
 
-    private bool IsStalemate(ChessBoard board)
+    public bool IsStalemate(ChessBoard board)
     {
-        // TODO Implement stalemate detection logic
+        if (!IsCheck(board) && !HasLegalMoves(board, board.currentPlayer))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool HasLegalMoves(ChessBoard board, ChessColor player)
+    {
+        foreach (var piece in board.GetPieces(player))
+        {
+            foreach (var move in piece.GetPossibleMoves(board))
+            {
+                ChessBoard newBoard = SimulateMove(board, (piece.column, piece.row, move.Item1, move.Item2));
+
+                if (!IsCheck(newBoard))
+                {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 

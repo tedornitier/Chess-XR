@@ -155,4 +155,23 @@ public class ChessAITests
         board.PrintBoard();
         Assert.IsTrue(ai.IsCheckmate(board));
     }
+
+    [Test]
+    public void IsStalemateTest()
+    {
+        ChessAI ai = new ChessAI(ChessColor.White, 2);
+        ChessBoard board = new ChessBoard();
+        board.currentPlayer = ChessColor.Black;
+
+        board.SetPieceAt((0, 0), new ChessPiece(ChessType.King, ChessColor.White));
+        board.SetPieceAt((1, 1), new ChessPiece(ChessType.Rook, ChessColor.Black));
+        board.SetPieceAt((2, 7), new ChessPiece(ChessType.Queen, ChessColor.Black));
+        board.PrintBoard();
+        Assert.IsFalse(ai.IsStalemate(board));
+
+        board.MovePiece((2, 7), (2, 1));
+        board.currentPlayer = ChessColor.White;
+        board.PrintBoard();
+        Assert.IsTrue(ai.IsStalemate(board));
+    }
 }
