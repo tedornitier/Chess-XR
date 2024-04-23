@@ -197,7 +197,7 @@ public class ChessPiece
     public int GetScore() {
         switch (type) {
             case ChessType.King:
-                return 9999;
+                return 0;
             case ChessType.Queen:
                 return 9;
             case ChessType.Rook:

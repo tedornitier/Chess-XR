@@ -145,15 +145,80 @@ public class ChessAI
         return newBoard;
     }
 
-    // TODO private
-    public int Evaluate(ChessBoard board)
+    private int Evaluate(ChessBoard board) // TODO test
     {
-        (int whiteScore, int blackScore) = board.GetScores();
+        // Evaluate piece mobility
+        int mobilityScoreWhite = EvaluatePieceMobility(board, ChessColor.White);
+        int mobilityScoreBlack = EvaluatePieceMobility(board, ChessColor.Black);
 
-        int aiScore = (aiColor == ChessColor.White) ? whiteScore : blackScore;
-        int opponentScore = (aiColor == ChessColor.White) ? blackScore : whiteScore;
+        // Evaluate pawn structure
+        int pawnStructureScoreWhite = EvaluatePawnStructure(board, ChessColor.White);
+        int pawnStructureScoreBlack = EvaluatePawnStructure(board, ChessColor.Black);
 
-        return aiScore - opponentScore;
+        // Evaluate control of the center
+        int centerControlScoreWhite = EvaluateControlOfCenter(board, ChessColor.White);
+        int centerControlScoreBlack = EvaluateControlOfCenter(board, ChessColor.Black);
+
+        // Combine individual scores into a single evaluation score
+        int totalScoreWhite = mobilityScoreWhite + pawnStructureScoreWhite + centerControlScoreWhite;
+        int totalScoreBlack = mobilityScoreBlack + pawnStructureScoreBlack + centerControlScoreBlack;
+
+        // Return the difference in scores (considering perspective of the AI player)
+        return totalScoreWhite - totalScoreBlack;
+    }
+
+
+    private int EvaluatePieceMobility(ChessBoard board, ChessColor color) // TODO test
+    {
+        int mobilityScore = 0;
+
+        // Iterate over all pieces of the specified color on the board
+        foreach (var piece in board.GetPieces(color))
+        {
+            // Get legal moves for the current piece
+            HashSet<(int, int)> legalMoves = piece.GetPossibleMoves(board);
+
+            // Increment the mobility score by the number of legal moves for this piece
+            mobilityScore += legalMoves.Count;
+        }
+
+        return mobilityScore;
+    }
+
+    private int EvaluatePawnStructure(ChessBoard board, ChessColor color) // TODO test
+    {
+        int pawnStructureScore = 0;
+
+        // Iterate over all pawns of the specified color on the board
+        foreach (var pawn in board.GetPieces(color))
+        {
+            // Check if it is a pawn
+            if (pawn.type != ChessType.Pawn) continue;
+            // Check for isolated pawns
+            if (!IsPawnIsolated(board, pawn))
+            {
+                pawnStructureScore -= 10; // Penalize isolated pawns
+            }
+
+            // Check for pawn chains
+            int pawnChainLength = GetPawnChainLength(board, pawn);
+            pawnStructureScore += pawnChainLength * 5; // Reward longer pawn chains
+        }
+
+        return pawnStructureScore;
+    }
+
+    private bool IsPawnIsolated(ChessBoard board, ChessPiece pawn) // TODO test
+    {
+        // Check if the pawn has neighboring pawns of the same color
+        foreach (var neighbor in board.GetAdjacentPieces((pawn.column, pawn.row)))
+        {
+            if (neighbor != null && neighbor.type == ChessType.Pawn && neighbor.color == pawn.color)
+            {
+                return false; // Pawn is not isolated
+            }
+        }
+        return true; // Pawn is isolated
     }
 
     public int GetPawnChainLength(ChessBoard board, ChessPiece pawn)
