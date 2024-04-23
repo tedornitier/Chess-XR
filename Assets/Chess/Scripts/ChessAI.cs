@@ -66,10 +66,27 @@ public class ChessAI
         return IsCheckmate(board) || IsStalemate(board);
     }
 
-    private bool IsCheckmate(ChessBoard board)
+    public bool IsCheckmate(ChessBoard board)
     {
-        // TODO Implement checkmate detection logic
-        return false;
+        if (!IsCheck(board))
+        {
+            return false;
+        }
+
+        foreach (var piece in board.GetPieces(board.currentPlayer))
+        {
+            foreach (var move in piece.GetPossibleMoves(board))
+            {
+                ChessBoard newBoard = SimulateMove(board, (piece.column, piece.row, move.Item1, move.Item2));
+
+                if (!IsCheck(newBoard))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     private bool IsStalemate(ChessBoard board)
